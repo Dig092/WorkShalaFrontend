@@ -2,7 +2,8 @@
 import NavBar from "./Components/NavBar";
 
 import heroImg from "./assets/images/heroImg.png";
-import wave
+import wave from "./assets/icons/wave.png";
+
 export default function HomePage() {
   return (
     <>
@@ -13,7 +14,7 @@ export default function HomePage() {
           <div className="w-2/4 flex items-center justify-center">
             <div className='w-3/4'>
                 <div>
-                    <img src={} alt="" />
+                    <img src={wave} />
                     <h5>WELCOME TO WORKSHALA</h5>
                     </div>
               
