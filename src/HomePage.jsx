@@ -1,11 +1,15 @@
 // import React from "react";
 import NavBar from "./Components/NavBar";
+import Footer from "./Components/Footer";
 
 import heroImg from "./assets/images/heroImg.png";
 import wave from "./assets/icons/wave.png";
 import serviceImg from "./assets/images/servicecardImg.png";
 import CogLogo from "./assets/icons/cognizantLogo.png";
 import star from "./assets/icons/star.png";
+import contestImg from "./assets/images/contestImg.png";
+import calender from "./assets/icons/Calender.png";
+import profile from "./assets/icons/Profile.png";
 
 export default function HomePage() {
   return (
@@ -232,43 +236,121 @@ export default function HomePage() {
 
         {/* Events */}
 
-        <div className="flex flex-col w-full items-center justify-around">
+        <div className="flex flex-col bg-[#FFB2CA12] w-full items-center justify-around mb-24">
           <div className="flex flex-col items-center mt-16 mb-24">
             <h5 className="text-xs">Events</h5>
-            <h2 className="text-3xl font-bold">
-              Upcoming Events and Challenges
-            </h2>
             <h2 className="text-3xl font-bold">
               Upcoming Events and Challenges
             </h2>
           </div>
 
           <div className="snap-x  flex overflow-x-auto scroll-smooth scrollbar-hide w-4/5 m-8">
-            <div className="flex flex-col items-center snap-start border-4 rounded-2xl flex-shrink-0 w-96 h-72 mx-4">
+
+            <div className="flex flex-col items-center snap-start border-2 border-[#B092D3] rounded-2xl flex-shrink-0 w-96 h-80 mx-4 overflow-hidden">
               <div>
-                <img src="" alt="" />
+                <img className="h-32" src={contestImg} alt="" />
               </div>
-              <div>
-                <div>
-                  <img src="" alt="" />
-                  <div>
-                    <h1>Beginner Contest 46</h1>
+              <div className="w-11/12 mt-2 mb-2">
+                <div className="flex justify-start
+                 m-2">
+                  <div className="w-12 h-12 bg-[#FFE5ED] rounded-md mr-3"></div>
+                  <div className="flex flex-col"> 
+                    <h1 className="text-md font-bold">Beginner Contest 46</h1>
                     <h1>Coding Ninjas</h1>
                   </div>
                 </div>
-                <div>
-                  <h1>Data Structure and Algorithm</h1>
+                <div className="mt-5 mb-2 border-2 rounded-lg p-1">
+                  <h1 className="ml-1">Data Structure and Algorithm</h1>
                 </div>
-                <div>
-                  <img src="" alt="" />
+                <div className="flex items-center gap-3 mt-4">
+                  <img className="h-5 w-5" src={calender} alt="" />
                   <h1>1 Nov, 9:00 PM</h1>
-                  <img src="" alt="" />
+                  <img className="h-5 w-5" src={profile} alt="" />
                   <h1>474 Enrolled</h1>
                 </div>
               </div>
             </div>
+
+            <div className="flex flex-col items-center snap-start border-2 border-[#B092D3] rounded-2xl flex-shrink-0 w-96 h-80 mx-4 overflow-hidden">
+              <div>
+                <img className="h-32" src={contestImg} alt="" />
+              </div>
+              <div className="w-11/12 mt-2 mb-2">
+                <div className="flex justify-start
+                 m-2">
+                  <div className="w-12 h-12 bg-[#FFE5ED] rounded-md mr-3"></div>
+                  <div className="flex flex-col"> 
+                    <h1 className="text-md font-bold">Beginner Contest 46</h1>
+                    <h1>Coding Ninjas</h1>
+                  </div>
+                </div>
+                <div className="mt-5 mb-2 border-2 rounded-lg p-1">
+                  <h1 className="ml-1">Data Structure and Algorithm</h1>
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  <img className="h-5 w-5" src={calender} alt="" />
+                  <h1>1 Nov, 9:00 PM</h1>
+                  <img className="h-5 w-5" src={profile} alt="" />
+                  <h1>474 Enrolled</h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center snap-start border-2 border-[#B092D3] rounded-2xl flex-shrink-0 w-96 h-80 mx-4 overflow-hidden">
+              <div>
+                <img className="h-32" src={contestImg} alt="" />
+              </div>
+              <div className="w-11/12 mt-2 mb-2">
+                <div className="flex justify-start
+                 m-2">
+                  <div className="w-12 h-12 bg-[#FFE5ED] rounded-md mr-3"></div>
+                  <div className="flex flex-col"> 
+                    <h1 className="text-md font-bold">Beginner Contest 46</h1>
+                    <h1>Coding Ninjas</h1>
+                  </div>
+                </div>
+                <div className="mt-5 mb-2 border-2 rounded-lg p-1">
+                  <h1 className="ml-1">Data Structure and Algorithm</h1>
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  <img className="h-5 w-5" src={calender} alt="" />
+                  <h1>1 Nov, 9:00 PM</h1>
+                  <img className="h-5 w-5" src={profile} alt="" />
+                  <h1>474 Enrolled</h1>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center snap-start border-2 border-[#B092D3] rounded-2xl flex-shrink-0 w-96 h-80 mx-4 overflow-hidden">
+              <div>
+                <img className="h-32" src={contestImg} alt="" />
+              </div>
+              <div className="w-11/12 mt-2 mb-2">
+                <div className="flex justify-start
+                 m-2">
+                  <div className="w-12 h-12 bg-[#FFE5ED] rounded-md mr-3"></div>
+                  <div className="flex flex-col"> 
+                    <h1 className="text-md font-bold">Beginner Contest 46</h1>
+                    <h1>Coding Ninjas</h1>
+                  </div>
+                </div>
+                <div className="mt-5 mb-2 border-2 rounded-lg p-1">
+                  <h1 className="ml-1">Data Structure and Algorithm</h1>
+                </div>
+                <div className="flex items-center gap-3 mt-4">
+                  <img className="h-5 w-5" src={calender} alt="" />
+                  <h1>1 Nov, 9:00 PM</h1>
+                  <img className="h-5 w-5" src={profile} alt="" />
+                  <h1>474 Enrolled</h1>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
+
+        <Footer/>
+
       </div>
     </>
   );
