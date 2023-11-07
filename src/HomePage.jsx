@@ -238,6 +238,9 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold">
               Upcoming Events and Challenges
             </h2>
+            <h2 className="text-3xl font-bold">
+              Upcoming Events and Challenges
+            </h2>
           </div>
 
           <div className="snap-x  flex overflow-x-auto scroll-smooth scrollbar-hide w-4/5 m-8">
