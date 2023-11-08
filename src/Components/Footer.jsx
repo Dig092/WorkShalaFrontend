@@ -11,10 +11,10 @@ export default function Footer() {
   return (
     <>
       <div className="flex flex-col bg-[#946CC3]">
-        <div className="flex justify-center">
-          <div className="flex flex-col items-start justify-center m-12">
+        <div className="flex justify-evenly">
+          <div className="flex flex-col  m-12">
             <h1 className="text-lg font-semibold mb-4">Important links</h1>
-            <div className="flex gap-6">
+            <div className="flex gap-7">
               <ul className="">
                 <a href="">
                   <li className="mb-1">About Us</li>
@@ -60,14 +60,14 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <label htmlFor="E-mail your Query"></label>
-            <input type="email" placeholder="Enter your e-mail here" />
+          <div className="flex flex-col justify-center m-7">
+            <h1 className="text-lg font-semibold"> E-mail your Query</h1>
+            <input className="p-2 rounded bg-[#DEC1FF]" type="email" placeholder="Enter your e-mail here" />
 
-            <div>
-              <h1>Apply on the go</h1>
-              <h1>Get real-time job updates on our App</h1>
-              <img src={footerLinks} />
+            <div className="bg-[#DEC1FF] mt-4 p-4 rounded">
+              <h1 className="text-xl font-bold ">Apply on the go</h1>
+              <h1 className="text-sm ">Get real-time job updates on our App</h1>
+              <img className="" src={footerLinks} />
             </div>
           </div>
         </div>
