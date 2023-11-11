@@ -2,6 +2,10 @@
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 
+import LoginPage from './Pages/LoginPage';
+import RegisterPage from './Pages/RegisterPage';
+import ForgetPassword from './Pages/ForgetPassword';
+
 import heroImg from "./assets/images/heroImg.png";
 import wave from "./assets/icons/wave.png";
 import serviceImg from "./assets/images/servicecardImg.png";
@@ -350,7 +354,9 @@ export default function HomePage() {
         </div>
 
         <Footer/>
-
+        <LoginPage />
+      <RegisterPage />
+      <ForgetPassword />
       </div>
     </>
   );

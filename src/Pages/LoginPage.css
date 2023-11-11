@@ -1,0 +1,71 @@
+.loginPage{
+    display: flex;
+   padding: 1%;
+    margin-left: 7%;
+}
+.loginContentContainer{
+    padding-left: 5rem;
+}
+#loginContentHeading{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    /* margin-top: 25%; */
+    /* margin-left: 50%; */
+    font-size: 3rem;
+}
+
+.loginPageContent{
+   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-size: 1.3rem;
+/* margin-left: 50%;
+   margin-top: 10%; */
+}
+.inputForLogin{
+    width:120%;
+    padding-top: 3%;
+    
+}
+.inputForLogin input{
+  padding: 3%;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+.rememberMe{
+display: flex;
+}
+.checkBoxForRememberMe{
+   
+    position: relative;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    padding-top: 1rem;
+}
+#rememberMeText{
+    font-size: 1rem;
+    
+}
+#ForgetPasswordText{
+    font-size: 1rem;
+    padding-left: 5rem;
+}
+#SignInButton{
+     background-color: #946CC3;
+    width:20rem;
+    color: white;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+}
+a{
+ text-decoration-line: none;
+}
+
+@media screen and (max-width: 500px) {
+    .loginPage{
+        display: flex;
+        flex-direction: column;
+       
+    }
+    
+    
+  }
