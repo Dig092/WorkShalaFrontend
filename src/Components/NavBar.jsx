@@ -11,9 +11,9 @@ export default function NavBar(){
                 <div className='w-44'>
                     <a href=""><img src={logo} alt="" /></a>
                 </div>
-                <a className='hover:text-[#946CC3]' href="">Home</a>
+                <a className='hover:text-[#946CC3]' href="/">Home</a>
                 <a className='hover:text-[#946CC3]' href="">Services</a>
-                <a className='hover:text-[#946CC3]' href="">Companies</a>
+                <a className='hover:text-[#946CC3]' href="/Companies">Companies</a>
                 <a className='hover:text-[#946CC3]' href="">Jobs</a>
             </div>
             <div className='flex items-center gap-7 '>
