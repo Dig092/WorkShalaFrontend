@@ -12,7 +12,7 @@ export default function NavBar(){
                     <a href=""><img src={logo} alt="" /></a>
                 </div>
                 <a className='hover:text-[#946CC3]' href="/">Home</a>
-                <a className='hover:text-[#946CC3]' href="">Services</a>
+                <a className='hover:text-[#946CC3]' href="">Courses</a>
                 <a className='hover:text-[#946CC3]' href="/Companies">Companies</a>
                 <a className='hover:text-[#946CC3]' href="">Jobs</a>
             </div>
