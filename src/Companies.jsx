@@ -15,6 +15,7 @@ export default function Companies() {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        // Add any other headers as needed
       },
       redirect: "follow",
     };
@@ -23,7 +24,8 @@ export default function Companies() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        setPosts(data);
+        // Set the state with the fetched data
+        setPosts(data.companies);
       })
       .catch((error) => console.log("error", error));
   };
@@ -250,11 +252,9 @@ export default function Companies() {
         <div className="w-3/4 h-full grid grid-cols-4 gap-16 mt-16 mb-16 mr-16 ">
           {posts.map((post) => (
             <div className="flex flex-col items-center  snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
-              <img
-                className="w-12 m-3"
-                src={`../src/assets/icons/${post.img}`}
-                alt="Company Icon"
-              />
+              <div className="flex items-center justify-center w-full h-20">
+                <img className="w-12 m-3 rounded-full" src={post.img} alt="Company Icon" />
+              </div>
               <div className="flex flex-col items-center bg-[#FFE5ED] p-2 rounded-md m-3">
                 <h1 className="text-xs font-bold mb-1">{post.title}</h1>
                 <div className="flex items-center justify-center">
@@ -264,8 +264,10 @@ export default function Companies() {
                   <h1 className="text-sm">1k Reviews</h1>
                 </div>
               </div>
-              <h1 className="text-3xl font-bold m-1">{post.title}</h1>
-              <h1 className="text-sm text-center px-9 ">{post.body}</h1>
+              <h1 className="text-2xl font-bold m-1">{post.title}</h1>
+              <div className="w-full h-12 overflow-hidden">
+              <h1 className="text-xs text-center px-9 ">{post.about}</h1>
+              </div>
               <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
                 View Jobs
               </button>
