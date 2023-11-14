@@ -37,7 +37,7 @@ export default function CoursesFull() {
     <>
     <NavBar />
 
-      <div>
+      <div className="w-full px-16 py-8 text-3xl font-semibold bg-[#FFF6F9]" >Courses For You</div>
         <div className="flex justify-center items-center w-full bg-[#FFF6F9]">
           <div className="w-3/4 h-full grid grid-cols-4 gap-16 mt-16 mb-16 mr-16 ">
             {posts.map((post) => (
@@ -59,7 +59,7 @@ export default function CoursesFull() {
             ))}
           </div>
         </div>
-      </div>
+      
 
       <Footer />
     </>
