@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 
@@ -18,12 +18,21 @@ export default function HomePage() {
   const getData = () => {
     var requestOptions = {
       method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        // Add any other headers as needed
+      },
       redirect: "follow",
     };
 
-    fetch("/companyData", requestOptions)
+    fetch("https://workshala-7v7q.onrender.com/companyData", requestOptions)
       .then((response) => response.json())
-      .then((result) => setPosts(result))
+      .then((data) => {
+        console.log(data);
+        // Set the state with the fetched data
+        setPosts(data.companies);
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -128,28 +137,37 @@ export default function HomePage() {
 
           <div className="snap-x  flex overflow-x-auto scroll-smooth scrollbar-hide w-4/5 m-8">
             {posts.map((post) => (
-            <div className="flex flex-col items-center  snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
-              <img className="w-12 m-3" src={`../src/assets/icons/${post.img}`} alt="Company Icon" />
-              <div className="flex flex-col items-center bg-[#FFE5ED] p-2 rounded-md m-3">
-                <h1 className="text-xs font-bold mb-1">{post.title}</h1>
-                <div className="flex items-center justify-center">
-                  <img className="w-4" src={star} alt="" />
-                  <h1 className="text-sm">3.3</h1>
-                  <div className="w-px mx-2 h-4 bg-[#00000060]"></div>
-                  <h1 className="text-sm">1k Reviews</h1>
+              <div className="flex flex-col items-center  snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
+                <div className="flex items-center justify-center w-full h-20">
+                  <img
+                    className="w-12 m-3 rounded-full"
+                    src={post.img}
+                    alt="Company Icon"
+                  />
                 </div>
+                <div className="flex flex-col items-center bg-[#FFE5ED] p-2 rounded-md m-3">
+                  <h1 className="text-xs font-bold mb-1">{post.title}</h1>
+                  <div className="flex items-center justify-center">
+                    <img className="w-4" src={star} alt="" />
+                    <h1 className="text-sm">3.3</h1>
+                    <div className="w-px mx-2 h-4 bg-[#00000060]"></div>
+                    <h1 className="text-sm">1k Reviews</h1>
+                  </div>
+                </div>
+                <h1 className="text-2xl font-bold m-1">{post.title}</h1>
+                <div className="w-full h-12 overflow-hidden">
+                  <h1 className="text-xs text-center px-9 ">{post.about}</h1>
+                </div>
+                <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
+                  View Jobs
+                </button>
               </div>
-              <h1 className="text-3xl font-bold m-1">{post.title}</h1>
-              <h1 className="text-sm text-center px-9 ">
-              {post.body}
-              </h1>
-              <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
-                View Jobs
-              </button>
-            </div>
             ))}
           </div>
-          <button onClick={()=>navigate("/Companies")} className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
+          <button
+            onClick={() => navigate("/Companies")}
+            className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit"
+          >
             View all Companies
           </button>
         </div>
