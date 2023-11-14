@@ -1,5 +1,4 @@
 import React from 'react'
-
 import ResetPasswordImage from '../assets/images/ResetPasswordImage.png';
   
 const ForgetPasswordVerify=() =>{
