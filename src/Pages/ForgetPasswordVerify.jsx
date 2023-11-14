@@ -1,8 +1,8 @@
 import React from 'react'
-import ResetPasswordImage from '../assets/images/ResetPasswordImage.png';
 
+import ResetPasswordImage from '../assets/images/ResetPasswordImage.png';
   
-const ForgetPassword=() =>{
+const ForgetPasswordVerify=() =>{
   return (
     <div class="flex p-1 ml-7">
         <div class="pl-24 pt-2">
@@ -27,7 +27,7 @@ const ForgetPassword=() =>{
         <div class="w-full pt-1 pb-10">
         <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' placeholder='Enter your password'/>
         </div>
-        <button class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md">Send OTP</button>
+        <button class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md">Reset my Password</button>
         </div>
         
         </div>
@@ -35,4 +35,4 @@ const ForgetPassword=() =>{
     
   )
 }
-export default ForgetPassword
+export default ForgetPasswordVerify

@@ -354,9 +354,7 @@ export default function HomePage() {
         </div>
 
         <Footer/>
-        <LoginPage />
-      <RegisterPage />
-      <ForgetPassword />
+      
       </div>
     </>
   );
