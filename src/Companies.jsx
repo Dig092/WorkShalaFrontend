@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 
@@ -13,12 +12,19 @@ export default function Companies() {
   const getData = () => {
     var requestOptions = {
       method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/Companies", requestOptions)
+    fetch("https://workshala-7v7q.onrender.com/companyData", requestOptions)
       .then((response) => response.json())
-      .then((result) => setPosts(result))
+      .then((data) => {
+        console.log(data);
+        setPosts(data);
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -41,7 +47,6 @@ export default function Companies() {
       </div>
 
       <div className="flex mx-8 py-12 justify-around">
-
         <Menu as="div" className="w-1/4 text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-60 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
@@ -239,7 +244,6 @@ export default function Companies() {
             </Menu.Items>
           </Transition>
         </Menu>
-        
       </div>
 
       <div className="flex justify-center items-center w-full bg-[#FFF6F9]">

@@ -21,7 +21,7 @@ export default function HomePage() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/Companies", requestOptions)
+    fetch("/companyData", requestOptions)
       .then((response) => response.json())
       .then((result) => setPosts(result))
       .catch((error) => console.log("error", error));
