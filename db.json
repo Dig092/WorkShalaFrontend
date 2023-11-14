@@ -1,0 +1,55 @@
+{
+    "Companies" : [
+        {
+            "id": 1,
+            "img": "cognizantLogo.png",
+            "title": "Cognizant",
+            "Location": "Delhi/NCR",
+            "Industry": "EdTech",
+            "CompanyType": "Corporate",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 2,
+            "img": "Googlelogo.png",
+            "title": "Google Pay",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 3,
+            "img": "Microsoftlogo.png",
+            "title": "Microsoft",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 4,
+            "img": "applelogo.png",
+            "title": "Apple",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 5,
+            "img": "cognizantLogo.png",
+            "title": "Cognizant",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 6,
+            "img": "Googlelogo.png",
+            "title": "Google Pay",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 7,
+            "img": "Microsoftlogo.png",
+            "title": "Microsoft",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        },
+        {
+            "id": 8,
+            "img": "applelogo.png",
+            "title": "Apple",
+            "body": "lorem ipsum is simply dummy text of the printing"
+        }
+    ]
+}
