@@ -24,7 +24,7 @@ const ForgetPasswordVerify=() =>{
         </div>
         OTP
         <div class="w-full pt-1 pb-10">
-        <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' placeholder='Enter your password'/>
+        <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' placeholder='Enter your OTP'/>
         </div>
         <button class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md">Reset my Password</button>
         </div>
