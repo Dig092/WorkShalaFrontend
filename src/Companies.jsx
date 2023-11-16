@@ -23,8 +23,6 @@ export default function Companies() {
     fetch("https://workshala-7v7q.onrender.com/companyData", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // Set the state with the fetched data
         setPosts(data.companies);
       })
       .catch((error) => console.log("error", error));
@@ -268,8 +266,8 @@ export default function Companies() {
               <div className="w-full h-12 overflow-hidden">
               <h1 className="text-xs text-center px-9 ">{post.about}</h1>
               </div>
-              <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
-                View Jobs
+              <button className=" px-8 py-2 m-8 text-xs text-white rounded bg-[#946CC3] hover:cursor-pointer hover:border hover:border-[#946CC3] hover:bg-white hover:text-black active:bg-inherit">
+                  View Jobs
               </button>
             </div>
           ))}

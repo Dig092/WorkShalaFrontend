@@ -20,7 +20,7 @@ export default function CoursesFull() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:3000/Companies", requestOptions)
+    fetch("https://courses-api-hrph.onrender.com/", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
