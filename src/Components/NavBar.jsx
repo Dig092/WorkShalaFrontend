@@ -11,10 +11,10 @@ export default function NavBar(){
                 <div className='w-44'>
                     <a href=""><img src={logo} alt="" /></a>
                 </div>
-                <a className='hover:text-[#946CC3]' href="">Home</a>
-                <a className='hover:text-[#946CC3]' href="">Services</a>
-                <a className='hover:text-[#946CC3]' href="">Companies</a>
-                <a className='hover:text-[#946CC3]' href="">Jobs</a>
+                <a className='hover:text-[#946CC3]' href="/">Home</a>
+                <a className='hover:text-[#946CC3]' href="/Courses">Courses</a>
+                <a className='hover:text-[#946CC3]' href="/Companies">Companies</a>
+                <a className='hover:text-[#946CC3]' href="/Jobs">Jobs</a>
             </div>
             <div className='flex items-center gap-7 '>
                 <button className=' px-3 py-2 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit'>
