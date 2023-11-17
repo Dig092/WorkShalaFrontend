@@ -15,6 +15,7 @@ import Courses from "./Courses";
 import CoursesFull from "./CoursesFull";
 import Jobs from "./Jobs";
 import Profile from "./Pages/Profile";
+import Welcome from "./Pages/Welcome";
 import { AuthProvider } from "./Components/AuthContext";
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
               element={<ForgetPasswordVerify />}
             ></Route>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/Welcome" element={<Welcome />} />
             <Route path="/Companies" element={<Companies />}></Route>
             <Route path="/Courses" element={<Courses />}></Route>
             <Route path="/CoursesFull" element={<CoursesFull />}></Route>
