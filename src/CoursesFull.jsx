@@ -20,18 +20,11 @@ export default function CoursesFull() {
       redirect: "follow",
     };
 
-    fetch(
-      "https://courseapi-s0hm.onrender.com/recommend/blockchain",
-      requestOptions
-    )
+    fetch("https://course2.onrender.com/recommend/javascript", requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data && Array.isArray(data.courses)) {
-          setCourses(data.courses);
-        } else {
-          setCourses([]);
-        }
+        setCourses(data.courses);
       })
       .catch((error) => console.log("error", error));
   };
@@ -49,15 +42,14 @@ export default function CoursesFull() {
       </div>
       <div className="flex justify-center items-center w-full bg-[#FFF6F9]">
         <div className="w-3/4 h-full grid grid-cols-4 gap-16 mt-16 mb-16 mr-16 ">
-          {courses.length > 0 ? (
+          {Array.isArray(courses) &&
             courses.map((course, index) => (
-              <div className="flex flex-col items-center  snap-start border rounded-md flex-shrink-0 w-64 h-80 mx-4">
-                <div className="w-64 h-32 bg-[#FFE5ED] rounded-md "></div>
-                <h1 className="text-lg font-semibold m-4">{course}</h1>
-                <h1 className="text-xs pl-4 ">
-                  Learn to design data models, build data warehouses and data
-                  lakes, automate data pipelines, and manage massive datasets.
+              <div className="flex flex-col items-start  snap-start border rounded-md flex-shrink-0 w-64 h-80 mx-4">
+                <div className="w-64 h-2/6 bg-[#FFE5ED] rounded-md "></div>
+                <h1 className="text-lg font-semibold m-4 h-1/6">
+                  {course.courses}
                 </h1>
+                <h1 className="text-xs pl-4 h-1/6">{course.Description}</h1>
                 <div className="w-60 h-0.5 mt-3 bg-[#FFE5ED]"></div>
                 <div className="w-full h-16 px-4 flex items-center justify-between">
                   <div>Free</div>
@@ -69,13 +61,9 @@ export default function CoursesFull() {
                   </div>
                 </div>
               </div>
-            ))
-          ) : (
-            <div>No Courses available</div>
-          )}
+            ))}
         </div>
       </div>
-
       <Footer />
     </>
   );
