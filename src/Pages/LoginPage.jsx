@@ -3,8 +3,10 @@ import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';  
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';  
 import { Link, useNavigate } from 'react-router-dom'; 
+import {useAuth} from "../Components/AuthContext";
  
 const LoginPage = () => { 
+  const {login} = useAuth()
   const [showPassword, setShowPassword] = useState(false); 
   const togglePasswordVisibility = () => { 
     setShowPassword(!showPassword); 
@@ -13,9 +15,6 @@ const LoginPage = () => {
   const [email,setEmail]=useState("") 
   const [password,setPassword]=useState("") 
   const nav=useNavigate(); 
- 
- 
- 
  
   async function signIn() 
   { 
@@ -33,7 +32,8 @@ const LoginPage = () => {
     }); 
     result =await result.json() 
     localStorage.setItem("user-info",JSON.stringify(result)) 
-    nav("/") 
+    login(); 
+    nav('/');
   }
 
 
