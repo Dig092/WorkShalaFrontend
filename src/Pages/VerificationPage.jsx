@@ -31,7 +31,7 @@ const VerificationPage = () => {
     });
     result =await result.json()
     localStorage.setItem("user-info",JSON.stringify(result))
-    nav("/")
+    nav("/Welcome")
   }
 
   return (
