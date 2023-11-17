@@ -1,7 +1,43 @@
+// import React, { useState } from 'react';
+// import RegisterPageImage from '../assets/images/RegisterPageImage.png'
+// import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png'; 
+// import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png'; 
+// import { Link, useNavigate } from 'react-router-dom';
+
+// const RegisterPage = () => {
+//   const [showPassword, setShowPassword] = useState(false);
+//   const togglePasswordVisibility = () => {
+//     setShowPassword(!showPassword);
+//   };
+
+//   const nav=useNavigate();
+//   const [name,setName]=useState("")
+//   const [phonenumber,setPhonenumber]=useState("")
+//   const [email,setEmail]=useState("")
+//   const [password,setPassword]=useState("")
+
+
+//   async function signUp() {
+//     let item = { name, phonenumber, email, password };
+//     console.warn(item);
+
+//     let result= await fetch("https://workshala-7v7q.onrender.com/register",{
+//       method:'POST',
+//       body:JSON.stringify(item),
+//       headers:{
+//         "Content-Type":'application/json',
+//         "Accept":'application.json'
+//       }
+//     })
+//     result =await result.json()
+//     localStorage.setItem("user-info",JSON.stringify(result))
+//     nav("/verify")
+//   }
+
 import React, { useState } from 'react';
-import RegisterPageImage from '../assets/images/RegisterPageImage.png'
-import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png'; 
-import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png'; 
+import RegisterPageImage from '../assets/images/RegisterPageImage.png';
+import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
+import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
 import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
@@ -10,29 +46,40 @@ const RegisterPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const nav=useNavigate();
-  const [name,setName]=useState("")
-  const [phonenumber,setPhonenumber]=useState("")
-  const [email,setEmail]=useState("")
-  const [password,setPassword]=useState("")
+  const nav = useNavigate();
+  const [name, setName] = useState('');
+  const [phonenumber, setPhonenumber] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  const isFormValid = name && phonenumber && email && password;
 
-  async function signUp() {
-    let item = { name, phonenumber, email, password };
-    console.warn(item);
+  const signUp = async () => {
+    if (isFormValid) {
+      let item = { name, phonenumber, email, password };
+      // console.warn(item);
+      localStorage.setItem('user-information', JSON.stringify(item))
 
-    let result= await fetch("https://workshala-7v7q.onrender.com/register",{
-      method:'POST',
-      body:JSON.stringify(item),
-      headers:{
-        "Content-Type":'application/json',
-        "Accept":'application.json'
+      try {
+        let result = await fetch('https://workshala-7v7q.onrender.com/register', {
+          method: 'POST',
+          body: JSON.stringify(item),
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application.json',
+          },
+        });
+        result = await result.json();
+        localStorage.setItem('user-info', JSON.stringify(result));
+        nav('/verify');
+      } catch (error) {
+        console.error('Registration failed', error);
+        // Handle registration error here
       }
-    })
-    result =await result.json()
-    localStorage.setItem("user-info",JSON.stringify(result))
-    nav("/verify")
-  }
+    } else {
+      alert('Please fill in all the details.');
+    }
+  };
 
   return (
     <div class="flex justify-center items-center">
@@ -92,12 +139,19 @@ const RegisterPage = () => {
             />
           </div>
           <br />
-          <button
+          {/* <button
             class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md"
             onClick={signUp}
           >
             Sign In
-          </button>
+          </button> */}
+           <button
+        className={`bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md ${isFormValid ? '' : 'cursor-not-allowed opacity-50'}`}
+        onClick={signUp}
+        disabled={!isFormValid}
+      >
+        Sign Up
+      </button>
         </div>
         <div class="text-center pt-2">
           Already Registered!{" "}
