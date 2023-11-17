@@ -1,18 +1,21 @@
 
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../Components/AuthContext';
+
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
-import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const nav = useNavigate();
@@ -47,23 +50,30 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex p-1 ml-7">
-      <div className="pl-24">
-        <img src={SignInPageImage} height="500rem" width="500rem" alt='' />
+    <div className="flex w-full items-center justify-center">
+      <div className="w-2/4">
+        <img className='' src={SignInPageImage} alt='' />
       </div>
-      <div className="pl-20 pt-16">
+      <div className="w-1/4 pl-24">
         <span className="font-sans text-left text-4xl font-bold">Login</span><br />
         <div className="font-sans text-base pt-12">
           Email<br />
           <div className="w-full pt-2 pb-3">
-            <input className="w-full p-3 pl-4 border border-black rounded-md text-xs" type='email'   value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email' />
+            <input
+              className="w-full p-3 pl-4 border border-black rounded-md text-xs"
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Enter your email'
+            />
           </div>
           Password
           <div className="w-full pt-2 relative">
             <input
               className="w-full p-3 pl-4 border border-black rounded-md text-xs"
               type={showPassword ? 'text' : 'password'}
-              value={password} onChange={(e)=>setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               placeholder='Enter your password'
             />
             <img

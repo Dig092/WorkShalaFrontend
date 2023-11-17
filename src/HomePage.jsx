@@ -3,10 +3,6 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 
-import LoginPage from './Pages/LoginPage';
-import RegisterPage from './Pages/RegisterPage';
-import ForgetPassword from './Pages/ForgetPassword';
-
 import heroImg from "./assets/images/heroImg.png";
 import wave from "./assets/icons/wave.png";
 import serviceImg from "./assets/images/servicecardImg.png";
@@ -162,7 +158,7 @@ export default function HomePage() {
                 <div className="w-full h-12 overflow-hidden">
                   <h1 className="text-xs text-center px-9 ">{post.about}</h1>
                 </div>
-                <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
+                <button className=" px-8 py-2 m-8 text-xs text-white rounded bg-[#946CC3] hover:cursor-pointer hover:border hover:border-[#946CC3] hover:bg-white hover:text-black active:bg-inherit">
                   View Jobs
                 </button>
               </div>

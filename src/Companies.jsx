@@ -6,8 +6,12 @@ import Footer from "./Components/Footer";
 
 import star from "./assets/icons/star.png";
 
-export default function Companies() {
-  const [posts, setPosts] = useState([]);
+const Companies = () => {
+  const [allPosts, setAllPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [locationFilter, setLocationFilter] = useState(null);
+  const [industryFilter, setIndustryFilter] = useState(null);
+  const [companyTypeFilter, setCompanyTypeFilter] = useState(null);
 
   const getData = () => {
     var requestOptions = {
@@ -23,16 +27,42 @@ export default function Companies() {
     fetch("https://workshala-7v7q.onrender.com/companyData", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // Set the state with the fetched data
-        setPosts(data.companies);
-      })
-      .catch((error) => console.log("error", error));
+        setAllPosts(data.companies);
+        setFilteredPosts(data.companies);
+      });
   };
 
   useEffect(() => {
     getData();
   }, []);
+
+  const applyFilters = () => {
+    let tempFilteredPosts = [...allPosts];
+
+    if (locationFilter) {
+      tempFilteredPosts = tempFilteredPosts.filter(
+        (post) => post.location === locationFilter
+      );
+    }
+
+    if (industryFilter) {
+      tempFilteredPosts = tempFilteredPosts.filter(
+        (post) => post.industry === industryFilter
+      );
+    }
+
+    if (companyTypeFilter) {
+      tempFilteredPosts = tempFilteredPosts.filter(
+        (post) => post.companyType === companyTypeFilter
+      );
+    }
+
+    setFilteredPosts(tempFilteredPosts);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [locationFilter, industryFilter, companyTypeFilter]);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -52,7 +82,7 @@ export default function Companies() {
         <Menu as="div" className="w-1/4 text-left">
           <div>
             <Menu.Button className="inline-flex w-full justify-center gap-60 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-              Location
+              {locationFilter || "Location"}
               <ChevronDownIcon
                 className="-mr-1 h-5 w-5 text-gray-400"
                 aria-hidden="true"
@@ -73,41 +103,41 @@ export default function Companies() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setLocationFilter("Delhi")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Delhi/NCR
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setLocationFilter("Banglore")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Banglore
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setLocationFilter("Mumbai")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Mumbai
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
               </div>
@@ -117,8 +147,8 @@ export default function Companies() {
 
         <Menu as="div" className="w-1/4 text-left">
           <div>
-            <Menu.Button className="inline-flex w-full justify-center gap-60 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-              Industry
+            <Menu.Button className="inline-flex w-full justify-center gap-52 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              {industryFilter || "Industry"}
               <ChevronDownIcon
                 className="-mr-1 h-5 w-5 text-gray-400"
                 aria-hidden="true"
@@ -139,41 +169,43 @@ export default function Companies() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() =>
+                        setIndustryFilter("IT Services & Consulting")
+                      }
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       IT Services & Consulting
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setIndustryFilter("Software Product")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Software Product
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setIndustryFilter("ED Tech")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
-                      EdTech
-                    </a>
+                      ED Tech
+                    </button>
                   )}
                 </Menu.Item>
               </div>
@@ -183,8 +215,8 @@ export default function Companies() {
 
         <Menu as="div" className="w-1/4 text-left">
           <div>
-            <Menu.Button className="inline-flex w-full justify-center gap-56 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-              Company Type
+            <Menu.Button className="inline-flex w-full justify-center gap-52 rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+              {companyTypeFilter || "Company Type"}
               <ChevronDownIcon
                 className="-mr-1 h-5 w-5 text-gray-400"
                 aria-hidden="true"
@@ -205,41 +237,41 @@ export default function Companies() {
               <div className="py-1">
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setCompanyTypeFilter("Foreign MNC")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Foreign MNC
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setCompanyTypeFilter("Corporate")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Corporate
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <a
-                      href="#"
+                    <button
+                      onClick={() => setCompanyTypeFilter("Indian MNC")}
                       className={classNames(
                         active ? "bg-gray-100 text-gray-900" : "text-gray-700",
-                        "block px-4 py-2 text-sm"
+                        "block px-4 py-2 text-sm w-full text-left"
                       )}
                     >
                       Indian MNC
-                    </a>
+                    </button>
                   )}
                 </Menu.Item>
               </div>
@@ -250,10 +282,14 @@ export default function Companies() {
 
       <div className="flex justify-center items-center w-full bg-[#FFF6F9]">
         <div className="w-3/4 h-full grid grid-cols-4 gap-16 mt-16 mb-16 mr-16 ">
-          {posts.map((post) => (
+          {filteredPosts.map((post) => (
             <div className="flex flex-col items-center  snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
               <div className="flex items-center justify-center w-full h-20">
-                <img className="w-12 m-3 rounded-full" src={post.img} alt="Company Icon" />
+                <img
+                  className="w-12 m-3 rounded-full"
+                  src={post.img}
+                  alt="Company Icon"
+                />
               </div>
               <div className="flex flex-col items-center bg-[#FFE5ED] p-2 rounded-md m-3">
                 <h1 className="text-xs font-bold mb-1">{post.title}</h1>
@@ -266,9 +302,9 @@ export default function Companies() {
               </div>
               <h1 className="text-2xl font-bold m-1">{post.title}</h1>
               <div className="w-full h-12 overflow-hidden">
-              <h1 className="text-xs text-center px-9 ">{post.about}</h1>
+                <h1 className="text-xs text-center px-9 ">{post.about}</h1>
               </div>
-              <button className=" px-3 py-2 m-8 text-xs rounded border border-[#946CC3] hover:cursor-pointer hover:text-white hover:bg-[#946CC3] active:bg-inherit">
+              <button className=" px-8 py-2 m-8 text-xs text-white rounded bg-[#946CC3] hover:cursor-pointer hover:border hover:border-[#946CC3] hover:bg-white hover:text-black active:bg-inherit">
                 View Jobs
               </button>
             </div>
@@ -279,4 +315,5 @@ export default function Companies() {
       <Footer />
     </>
   );
-}
+};
+export default Companies;
