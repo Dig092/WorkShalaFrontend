@@ -37,38 +37,6 @@ const LoginPage = () => {
     }
   }
 
-const LoginPage = () => {
-  const { login } = useAuth();
-  const [showPassword, setShowPassword] = useState(false);
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const nav = useNavigate();
-
-  async function signIn() {
-    let item = { email, password };
-    console.warn(item);
-
-    let result = await fetch("https://workshala-7v7q.onrender.com/login", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application.json",
-      },
-    });
-
-    result = await result.json();
-    if (result.ok) {
-      localStorage.setItem("user-info", JSON.stringify(result));
-      login();
-      nav("/");
-    }
-  }
-
   return (
     <div className="flex w-full items-center justify-center">
       <div className="w-2/4">
@@ -132,5 +100,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage;
