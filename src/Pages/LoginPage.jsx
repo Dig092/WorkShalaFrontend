@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
@@ -5,6 +6,8 @@ import { useAuth } from '../Components/AuthContext';
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const navigate = useNavigate(); // Use useNavigate instead of useHistory
@@ -13,26 +16,37 @@ const LoginPage = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const nav = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const notify = () => toast.success('Successfully logged in!');
 
   async function signIn() {
     let item = { email, password };
+    console.warn(item);
 
-    let result = await fetch("https://workshala-7v7q.onrender.com/login", {
-      method: 'POST',
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": 'application/json',
-        "Accept": 'application/json'
-      }
-    });
+    try {
+      let result = await fetch('https://workshala-7v7q.onrender.com/login', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application.json',
+        },
+      });
 
-    result = await result.json();
-    localStorage.setItem("user-info", JSON.stringify(result));
-    login();
-    navigate("/"); 
+      result = await result.json();
+      localStorage.setItem('user-info', JSON.stringify(result));
+      nav('/');
+
+      // Display a success toast
+      notify();
+    } catch (error) {
+      // Handle login error here, and optionally display an error toast
+      console.error('Login failed', error);
+      toast.error('Login failed. Please check your credentials.');
+    }
   }
 
   return (
@@ -76,6 +90,7 @@ const LoginPage = () => {
             <p className="text-sm pl-24 pt-2 pb-4"><Link to="/forgetpassword">Forget Password?</Link></p>
           </div><br />
           <button className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md" onClick={signIn}>Sign In</button>
+          <ToastContainer />
         </div><br />
         <div className="text-center pt-2 font-bold">Haven't Registered Yet! <Link to="/register" className="text-[#946CC3]">Register Now</Link></div>
       </div>

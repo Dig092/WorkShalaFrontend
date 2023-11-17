@@ -14,6 +14,7 @@ import Companies from "./Companies";
 import Courses from "./Courses";
 import CoursesFull from "./CoursesFull";
 import Jobs from "./Jobs";
+import VerificationPage from "./Pages/VerificationPage";
 import Profile from "./Pages/Profile";
 import Welcome from "./Pages/Welcome";
 import { AuthProvider } from "./Components/AuthContext";
@@ -41,6 +42,7 @@ const App = () => {
             <Route path="/Courses" element={<Courses />}></Route>
             <Route path="/CoursesFull" element={<CoursesFull />}></Route>
             <Route path="/Jobs" element={<Jobs />}></Route>
+            <Route path="verify" element={<VerificationPage />}></Route>
           </Routes>
         </Router>
       </AuthProvider>

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
-import RegisterPageImage from "../assets/images/RegisterPageImage.png";
-import ShowPasswordImage from "../assets/icons/EyeImageForShowPassword1.png";
-import HidePasswordImage from "../assets/icons/EyeImageForNotShowPassword.png";
-import { Link } from "react-router-dom";
-// import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
+import RegisterPageImage from '../assets/images/RegisterPageImage.png'
+import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png'; 
+import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png'; 
+import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,27 +10,28 @@ const RegisterPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const [name, setName] = useState("");
-  const [phonenumber, setPhonenumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // const history=useHistory();
+  const nav=useNavigate();
+  const [name,setName]=useState("")
+  const [phonenumber,setPhonenumber]=useState("")
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+
 
   async function signUp() {
     let item = { name, phonenumber, email, password };
     console.warn(item);
 
-    let result = await fetch("https://workshala-7v7q.onrender.com/register", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application.json",
-      },
-    });
-    result = await result.json();
-    localStorage.setItem("user-info", JSON.stringify(result));
-    // history.push("/")
+    let result= await fetch("https://workshala-7v7q.onrender.com/register",{
+      method:'POST',
+      body:JSON.stringify(item),
+      headers:{
+        "Content-Type":'application/json',
+        "Accept":'application.json'
+      }
+    })
+    result =await result.json()
+    localStorage.setItem("user-info",JSON.stringify(result))
+    nav("/verify")
   }
 
   return (
@@ -87,7 +87,7 @@ const RegisterPage = () => {
             <img
               src={showPassword ? HidePasswordImage : ShowPasswordImage}
               alt="Toggle Password Visibility"
-              className="absolute top-7 right-4 transform -translate-y-1/2 cursor-pointer"
+              className="absolute pb-10 right-1/4 transform -translate-y-1/2 cursor-pointer"
               onClick={togglePasswordVisibility}
             />
           </div>
