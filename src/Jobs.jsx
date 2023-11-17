@@ -11,10 +11,35 @@ import time from "./assets/icons/time.png";
 import logo from "./assets/icons/kraftbaseLogo.png";
 
 export default function Jobs() {
+  const navigate = useNavigate();
+  const [courses, setCourses] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  const getData = () => {
+    var requestOptions = {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+    };
+
+    fetch("https://intrship.onrender.com/internship/javascript", requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setCourses(data.courses);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -340,8 +365,12 @@ export default function Jobs() {
               </div>
             </div>
             <div className="flex gap-8">
-            <div className="border px-4 py-1 border-black rounded-lg">Apply</div>
-            <div className="border px-4 py-1 border-black rounded-lg">Save</div>
+              <div className="border px-4 py-1 border-black rounded-lg">
+                Apply
+              </div>
+              <div className="border px-4 py-1 border-black rounded-lg">
+                Save
+              </div>
             </div>
           </div>
           <div className="flex flex-col mx-8 my-4">
