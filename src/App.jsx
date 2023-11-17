@@ -26,7 +26,7 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route exact path="/" element={<ProtectedRoute><Profile /></ProtectedRoute>}></Route>
+          <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>} />
             <Route path="/" element={<HomePage />}></Route>
             <Route path="login" element={<LoginPage />}></Route>
             <Route path="forgetpassword" element={<ForgetPassword />}></Route>

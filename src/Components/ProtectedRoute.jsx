@@ -7,7 +7,7 @@ const ProtectedRoute = ({ element, ...rest }) => {
     const isAuthenticated = useAuthCheck();
   
     return isAuthenticated ? (
-      <Route {...rest} element={element} />
+      <Route {...rest}>{children}</Route>
     ) : (
       <Navigate to="/login" />
     );

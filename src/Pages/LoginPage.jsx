@@ -31,9 +31,12 @@ const LoginPage = () => {
       } 
     }); 
     result =await result.json() 
-    localStorage.setItem("user-info",JSON.stringify(result)) 
-    login(); 
-    nav('/');
+    if (result.ok) {
+      localStorage.setItem("user-info", JSON.stringify(result));
+      login();
+      nav("/");
+    }
+   
   }
 
 
