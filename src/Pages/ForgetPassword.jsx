@@ -2,14 +2,32 @@ import React, { useState } from 'react';
 import ResetPasswordImage from '../assets/images/ResetPasswordImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png'; 
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png'; 
-  
+import { Link, useNavigate } from 'react-router-dom';  
+
 const ForgetPassword=() =>{
 
   const [showPassword, setShowPassword] = useState(false);
-
+  const nav=useNavigate(); 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  async function sendotp() {
+    let item = { name, phonenumber, email, password };
+    console.warn(item);
+
+    let result= await fetch("https://workshala-7v7q.onrender.com/register",{
+      method:'POST',
+      body:JSON.stringify(item),
+      headers:{
+        "Content-Type":'application/json',
+        "Accept":'application.json'
+      }
+    })
+    result =await result.json()
+    localStorage.setItem("user-info",JSON.stringify(result))
+    nav("/forgetpasswordverify");
+  }
 
   return (
     <div class="flex p-1 ml-7">
@@ -22,11 +40,16 @@ const ForgetPassword=() =>{
         <div class="font-sans text-1x1 pt-12">
          New Password
         <div class="w-full pt-1 pb-2">
+        value={newpassword}
+              onChange={(e) => setEmail(e.target.value)}
         <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' placeholder='Enter your New Password'/>
         </div>
         Confirm Password
         <div class="w-full pt-1 pb-2">
-        <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' placeholder='Re-write your New Password'/>
+        <input class="w-full p-3 pl-4 border border-black rounded-md text-xs" type='password' 
+         value={confirmpassword}
+         onChange={(e) => setEmail(e.target.value)}
+        placeholder='Re-write your New Password'/>
         </div>
         Email
         <div class="w-full pt-1 pb-2">
@@ -37,6 +60,8 @@ const ForgetPassword=() =>{
         <input
               className="w-full p-3 pl-4 border border-black rounded-md text-xs"
               type={showPassword ? 'text' : 'password'}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder='Enter your OTP'
             />
              <img
@@ -46,7 +71,8 @@ const ForgetPassword=() =>{
               onClick={togglePasswordVisibility}
             />
         </div>
-        <button class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md">Send OTP</button>
+        <button class="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md" onClick={sendotp}>
+          Send OTP</button>
         </div>
         
         </div>

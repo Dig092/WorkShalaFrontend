@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     // Assuming login is successful, set the authentication state and store user information
     setIsAuthenticated(true);
     // Additional logic to store user information if needed
-    localStorage.setItem('user-info', JSON.stringify(userInfo));
+    localStorage.setItem('user-info', JSON.stringify());
   };
 
   const logout = () => {
