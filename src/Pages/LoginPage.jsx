@@ -17,23 +17,42 @@ const LoginPage = () => {
   const nav = useNavigate();
 
   async function signIn() {
-    let item = { email, password };
-    console.warn(item);
+    try {
+      let item = { email, password };
+      console.warn(item);
 
-    let result = await fetch("https://workshala-7v7q.onrender.com/login", {
-      method: "POST",
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application.json",
-      },
-    });
+      let result = await fetch("https://workshala-7v7q.onrender.com/login", {
+        method: "POST",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application.json",
+        },
+      });
 
-    result = await result.json();
-      localStorage.setItem("user-info", JSON.stringify(result));
-      login();
-      nav("/");
+      if (result.ok) {
+        const data = await result.json();
+        const { accessToken } = data; // Assuming the API returns an accessToken
 
+        // Store the access token in localStorage
+        localStorage.setItem("access-token", accessToken);
+
+        // Set the access token in the headers for subsequent requests
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application.json",
+          Authorization: `Bearer ${accessToken}`,
+        };
+        login();
+        nav("/");
+      } else {
+        // Handle unsuccessful login (e.g., show an error message to the user)
+        console.error("Login failed");
+      }
+    } catch (error) {
+      // Handle other errors (network issues, etc.)
+      console.error("An error occurred during login", error);
+    }
   }
 
   return (

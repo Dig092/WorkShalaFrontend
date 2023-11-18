@@ -3,8 +3,11 @@ import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Components/AuthContext';
 
 const VerificationPage = () => {
+  const { login } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -15,32 +18,41 @@ const VerificationPage = () => {
   const nav = useNavigate();
 
   async function verify() {
-    let item = { email, otp };
-    console.warn(item);
-
     try {
-      let result = await fetch('https://workshala-7v7q.onrender.com/verifyEmail', {
-        method: 'POST',
+      let item = { email, otp };
+      console.warn(item);
+
+      let result = await fetch("https://workshala-7v7q.onrender.com/verifyEmail", {
+        method: "POST",
         body: JSON.stringify(item),
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application.json',
+          "Content-Type": "application/json",
+          Accept: "application.json",
         },
       });
 
-      result = await result.json();
+      if (result.ok) {
+        // const data = await result.json();
+        // const { accessToken } = data; // Assuming the API returns an accessToken
 
-      if (result.success) {
-        localStorage.setItem('user-info', JSON.stringify(result));
-        nav('/Welcome');
+        // // Store the access token in localStorage
+        // localStorage.setItem("access-token", accessToken);
+
+        // // Set the access token in the headers for subsequent requests
+        // const headers = {
+        //   "Content-Type": "application/json",
+        //   Accept: "application.json",
+        //   Authorization: `Bearer ${accessToken}`,
+        // };
+        login();
+        nav("/Welcome");
       } else {
-        // Display an error message or take appropriate action
-        console.error('OTP verification failed');
-        // You can set an error state or show an error message to the user
+        // Handle unsuccessful login (e.g., show an error message to the user)
+        console.error("Verify failed");
       }
     } catch (error) {
-     
-      // Handle verification error here
+      // Handle other errors (network issues, etc.)
+      console.error("An error occurred during login", error);
     }
   }
 
