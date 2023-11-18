@@ -4,10 +4,12 @@ import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const VerificationPage = () => {
   const { login } = useAuth();
-
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -21,7 +23,7 @@ const VerificationPage = () => {
     try {
       let item = { email, otp };
       console.warn(item);
-
+  
       let result = await fetch("https://workshala-7v7q.onrender.com/verifyEmail", {
         method: "POST",
         body: JSON.stringify(item),
@@ -30,29 +32,20 @@ const VerificationPage = () => {
           Accept: "application.json",
         },
       });
-
+  
       if (result.ok) {
-        // const data = await result.json();
-        // const { accessToken } = data; // Assuming the API returns an accessToken
-
-        // // Store the access token in localStorage
-        // localStorage.setItem("access-token", accessToken);
-
-        // // Set the access token in the headers for subsequent requests
-        // const headers = {
-        //   "Content-Type": "application/json",
-        //   Accept: "application.json",
-        //   Authorization: `Bearer ${accessToken}`,
-        // };
         login();
         nav("/Welcome");
+        toast.success('Verification successful!');
       } else {
-        // Handle unsuccessful login (e.g., show an error message to the user)
+        // Handle unsuccessful verification (e.g., show an error message to the user)
         console.error("Verify failed");
+        toast.error('Verification failed. Please try again.');
       }
     } catch (error) {
       // Handle other errors (network issues, etc.)
-      console.error("An error occurred during login", error);
+      console.error("An error occurred during verification", error);
+      toast.error('An error occurred during verification. Please try again.');
     }
   }
 
@@ -87,6 +80,7 @@ const VerificationPage = () => {
           <button className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md" onClick={verify}>Sign In</button>
         </div><br />
       </div>
+      <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </div>
   );
 };
