@@ -6,10 +6,14 @@ import useAuthCheck from './AuthCheck';
 const ProtectedRoute = ({ children, ...rest }) => {
   const isAuthenticated = useAuthCheck();
 
-  return isAuthenticated ? (
-    <Route {...rest}>{children}</Route>
-  ) : (
-    <Navigate to="/login" />
+  return (
+    <Route {...rest}>
+      {isAuthenticated ? (
+        children
+      ) : (
+        <Navigate to="/login" />
+      )}
+    </Route>
   );
 };
 

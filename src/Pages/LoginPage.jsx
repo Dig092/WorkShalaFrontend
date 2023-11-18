@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import SignInPageImage from "../assets/images/SignInPageImage.png";
-import ShowPasswordImage from "../assets/icons/EyeImageForShowPassword1.png";
-import HidePasswordImage from "../assets/icons/EyeImageForNotShowPassword.png";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../Components/AuthContext";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../Components/AuthContext';
+import { toast } from 'react-toastify';
+
+import SignInPageImage from '../assets/images/SignInPageImage.png';
+import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
+import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -12,48 +14,51 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const nav = useNavigate();
 
-  async function signIn() {
+  const signIn = async () => {
     try {
       let item = { email, password };
       console.warn(item);
 
-      let result = await fetch("https://workshala-7v7q.onrender.com/login", {
-        method: "POST",
+      let result = await fetch('https://workshala-7v7q.onrender.com/login', {
+        method: 'POST',
         body: JSON.stringify(item),
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application.json",
+          'Content-Type': 'application/json',
+          Accept: 'application.json',
         },
       });
 
       if (result.ok) {
         const data = await result.json();
-        const { accessToken } = data; // Assuming the API returns an accessToken
+        const { accessToken } = data;
 
         // Store the access token in localStorage
-        localStorage.setItem("access-token", accessToken);
+        localStorage.setItem('access-token', accessToken);
 
         // Set the access token in the headers for subsequent requests
         const headers = {
-          "Content-Type": "application/json",
-          Accept: "application.json",
+          'Content-Type': 'application/json',
+          Accept: 'application.json',
           Authorization: `Bearer ${accessToken}`,
         };
-        login();
-        nav("/");
+        login(accessToken);
+        nav('/');
+        
+        // Display a success toast
+        toast.success('Login successful!', { position: 'top-right' });
       } else {
         // Handle unsuccessful login (e.g., show an error message to the user)
-        console.error("Login failed");
+        console.error('Login failed');
       }
     } catch (error) {
       // Handle other errors (network issues, etc.)
-      console.error("An error occurred during login", error);
+      console.error('An error occurred during login', error);
     }
-  }
+  };
 
   return (
     <div className="flex w-full items-center justify-center">
