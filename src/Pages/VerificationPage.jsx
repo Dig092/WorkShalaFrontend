@@ -1,38 +1,3 @@
-// import React, { useState} from 'react';
-// import SignInPageImage from '../assets/images/SignInPageImage.png';
-// import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png'; 
-// import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png'; 
-// import { Link, useNavigate } from 'react-router-dom';
-
-
-// const VerificationPage = () => {
-//   const [showPassword, setShowPassword] = useState(false);
-//   const togglePasswordVisibility = () => {
-//     setShowPassword(!showPassword);
-//   };
-
-//   const [email,setEmail]=useState("")
-//   const [otp,setOTP]=useState("")
-//   const nav=useNavigate();
-
-
-//   async function verify()
-//   {
-//     let item={email,otp}
-//     console.warn(item);
-
-//     let result= await fetch("https://workshala-7v7q.onrender.com/verifyEmail",{
-//       method:'POST',
-//       body:JSON.stringify(item),
-//       headers:{
-//         "Content-Type":'application/json',
-//         "Accept":'application.json'
-//       }
-//     });
-//     result =await result.json()
-//     localStorage.setItem("user-info",JSON.stringify(result))
-//     nav("/Welcome")
-//   }
 import React, { useState } from 'react';
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
