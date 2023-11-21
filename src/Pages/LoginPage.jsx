@@ -1,32 +1,28 @@
-
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
+import { toast } from 'react-toastify';
 
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
   const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const nav = useNavigate();
 
-  const notify = () => toast.success('Successfully logged in!');
-
-  async function signIn() {
-    let item = { email, password };
-    console.warn(item);
-
+  const signIn = async () => {
     try {
+      let item = { email, password };
+      console.warn(item);
+
       let result = await fetch('https://workshala-7v7q.onrender.com/login', {
         method: 'POST',
         body: JSON.stringify(item),
@@ -36,45 +32,62 @@ const LoginPage = () => {
         },
       });
 
-      result = await result.json();
-      localStorage.setItem('user-info', JSON.stringify(result));
-      nav('/');
+      if (result.ok) {
+        const data = await result.json();
+        const { accessToken } = data;
 
-      // Display a success toast
-      notify();
+        // Store the access token in localStorage
+        localStorage.setItem('access-token', accessToken);
+
+        // Set the access token in the headers for subsequent requests
+        const headers = {
+          'Content-Type': 'application/json',
+          Accept: 'application.json',
+          Authorization: `Bearer ${accessToken}`,
+        };
+        login(accessToken);
+        nav('/');
+        
+        // Display a success toast
+        toast.success('Login successful!', { position: 'top-right' });
+      } else {
+        // Handle unsuccessful login (e.g., show an error message to the user)
+        console.error('Login failed');
+      }
     } catch (error) {
-      // Handle login error here, and optionally display an error toast
-      console.error('Login failed', error);
-      toast.error('Login failed. Please check your credentials.');
+      // Handle other errors (network issues, etc.)
+      console.error('An error occurred during login', error);
     }
-  }
+  };
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-2/4">
-        <img className='' src={SignInPageImage} alt='' />
+    <div className="flex flex-col md:flex-row items-center justify-center">
+      <div className="w-full md:w-1/2 mb-4 md:mb-0">
+        <img className="w-full" src={SignInPageImage} alt="" />
       </div>
-      <div className="w-1/4 pl-24">
-        <span className="font-sans text-left text-4xl font-bold">Login</span><br />
-        <div className="font-sans text-base pt-12">
-          Email<br />
+      <div className="w-full md:w-1/4 pl-4 md:pl-24">
+        <span className="font-sans text-left text-4xl font-bold">Login</span>
+        <br />
+        <div className="font-sans text-base pt-4 md:pt-12">
+          Email
+          <br />
           <div className="w-full pt-2 pb-3">
             <input
               className="w-full p-3 pl-4 border border-black rounded-md text-xs"
-              type='email'
+              type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder='Enter your email'
+              placeholder="Enter your email"
             />
           </div>
           Password
           <div className="w-full pt-2 relative">
             <input
               className="w-full p-3 pl-4 border border-black rounded-md text-xs"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder='Enter your password'
+              placeholder="Enter your password"
             />
             <img
               src={showPassword ? HidePasswordImage : ShowPasswordImage}
@@ -83,16 +96,28 @@ const LoginPage = () => {
               onClick={togglePasswordVisibility}
             />
           </div>
-          <div className="flex">
-            <label className="text-sm pt-2">
+          <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-4 md:pt-2">
+            <label className="text-sm pt-2 md:pt-0">
               <input type="checkbox" /> Remember me
             </label>
-            <p className="text-sm pl-24 pt-2 pb-4"><Link to="/forgetpassword">Forget Password?</Link></p>
-          </div><br />
-          <button className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md" onClick={signIn}>Sign In</button>
-          <ToastContainer />
-        </div><br />
-        <div className="text-center pt-2 font-bold">Haven't Registered Yet! <Link to="/register" className="text-[#946CC3]">Register Now</Link></div>
+            <p className="text-sm md:pl-24 pt-2 pb-4">
+              <Link to="/forgetpassword">Forget Password?</Link>
+            </p>
+          </div>
+          <br />
+          <button
+            className="bg-[#946CC3] text-white w-full md:w-80 p-2.5 mb-2 rounded-md"
+            onClick={signIn}
+          >
+            Sign In
+          </button>
+        </div>
+        <div className="text-center pt-2 font-bold">
+          Haven't Registered Yet!{" "}
+          <Link to="/register" className="text-[#946CC3]">
+            Register Now
+          </Link>
+        </div>
       </div>
     </div>
   );
