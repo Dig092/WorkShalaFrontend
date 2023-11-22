@@ -6,11 +6,41 @@ import NavBar from "../Components/NavBar";
 const Profile = () => {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const [profileData, setProfileData] = useState({});
+
   const handleLogout = () => {
     localStorage.removeItem("user-info");
     logout();
     navigate("/");
   };
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const response = await fetch('https://workshala-7v7q.onrender.com/profile', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            Authorization: `Bearer ${YOUR_ACCESS_TOKEN}`, // Replace with the actual access token
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setProfileData(data); // Set the fetched profile data in state
+        } else {
+          console.error('Failed to fetch profile data');
+        }
+      } catch (error) {
+        console.error('An error occurred during profile data fetch', error);
+      }
+    };
+
+    fetchProfileData();
+  }, []); // The empty dependency array ensures that this effect runs once when the component mounts
+
+
 
   return (
     <>
@@ -22,7 +52,7 @@ const Profile = () => {
             <img src="" alt="" />
           </div>
           <div className="flex flex-col ml-4">
-            <div className="font-semibold text-xl pb-1">Dhruval Gupta</div>
+            <div className="font-semibold text-xl pb-1">{profileData}</div>
             <div className="pb-1">UI/UX Designer . Web Developer</div>
             <div>Ajay Kumar Garg Engineering College</div>
           </div>

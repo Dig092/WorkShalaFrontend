@@ -53,7 +53,13 @@ const RegisterPage = () => {
           Accept: 'application/json',
           Authorization: `Bearer ${accessToken}`,
         };
-        
+  
+        // Use the headers in the fetch request
+        let result2 = await fetch('https://workshala-7v7q.onrender.com/register', {
+          method: 'POST',
+          body: JSON.stringify(item),
+          headers: headers,
+        });
           login();
           nav('/verify');
           toast.success('Registration successful!');
