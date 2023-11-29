@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row justify-evenly">
         <div className="flex flex-col m-4 md:m-12">
           <h1 className="text-lg font-semibold mb-4">Important links</h1>
-          <div className="flex flex-col md:flex-row gap-7">
+          <div className="flex flex-col md:flex-row  gap-7">
             <ul className="mb-4 md:mb-0">
               <a href="#">
                 <li className="mb-1">About Us</li>
