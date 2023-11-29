@@ -29,8 +29,6 @@ export default function HomePage() {
     fetch("https://workshala-7v7q.onrender.com/companyData", requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        // Set the state with the fetched data
         setPosts(data.companies);
       })
       .catch((error) => console.log("error", error));
@@ -42,23 +40,23 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-auto">
         <NavBar />
 
         {/* heroSection */}
 
-        <div className="w-full h-full flex">
-          <div className="w-2/5 flex items-center justify-center">
+        <div className="w-full h-full flex-shrink-0 md:flex">
+          <div className="md:w-3/5 flex items-center justify-center">
             <div className="w-3/4">
               <div className="flex gap-2 mb-2">
                 <img className="w-5" src={wave} />
                 <h5 className="text-[#B092D3]">WELCOME TO WORKSHALA</h5>
               </div>
 
-              <h1 className="font-bold text-5xl w-96 mb-2">
+              <h1 className="font-bold text-xl md:text-5xl w-36 md:w-96 mb-2 ">
                 Best Place To Get You Placed
               </h1>
-              <h6 className="mb-4 w-112">
+              <h6 className="mb-4 w-112 ">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry-s standard dummy
                 text ever since the 1500s.
@@ -73,12 +71,12 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          <div className="w-3/5">
+          <div className="hidden md:block w-3/5">
             <img className="w-4/5" src={heroImg} alt="" />
           </div>
         </div>
 
-        {/* Services */}
+        {/* services */}
 
         <div className="flex flex-col bg-[#FFB2CA12] w-full justify-around">
           <div className="flex flex-col items-center mt-16 mb-24">
@@ -86,8 +84,8 @@ export default function HomePage() {
             <h2 className="text-3xl font-bold">Our Services</h2>
           </div>
 
-          <div className="flex mb-24 justify-evenly mx-16">
-            <div className="flex flex-col items-center w-1/6 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
+          <div className="flex flex-wrap mb-24 justify-evenly mx-auto">
+            <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
               <img className="w-24 m-7" src={serviceImg} alt="" />
               <h2 className="font-bold text-2xl">Internships</h2>
               <h5 className="text-center text-sm m-3">
@@ -96,7 +94,7 @@ export default function HomePage() {
               </h5>
             </div>
 
-            <div className="flex flex-col items-center w-1/6 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
+            <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
               <img className="w-24 m-7" src={serviceImg} alt="" />
               <h2 className="font-bold text-2xl">Jobs</h2>
               <h5 className="text-center text-sm m-3">
@@ -105,7 +103,7 @@ export default function HomePage() {
               </h5>
             </div>
 
-            <div className="flex flex-col items-center w-1/6 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
+            <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
               <img className="w-24 m-7" src={serviceImg} alt="" />
               <h2 className="font-bold text-2xl">Courses</h2>
               <h5 className="text-center text-sm m-3">
@@ -114,7 +112,7 @@ export default function HomePage() {
               </h5>
             </div>
 
-            <div className="flex flex-col items-center w-1/6 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
+            <div className="flex flex-col items-center w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded hover:shadow-[-5px_4px_20px_0px_rgba(0,131,255,0.15)] hover:text-[#0083E1]">
               <img className="w-24 m-7" src={serviceImg} alt="" />
               <h2 className="font-bold text-2xl">Placement</h2>
               <h5 className="text-center text-sm m-3">
@@ -130,7 +128,7 @@ export default function HomePage() {
         <div className="flex flex-col w-full items-center justify-around">
           <div className="flex flex-col items-center mt-16 mb-24">
             <h5 className="text-xs">Companies</h5>
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-3xl text-center font-bold">
               Featured Companies actively hiring
             </h2>
           </div>
@@ -177,7 +175,7 @@ export default function HomePage() {
         <div className="flex flex-col bg-[#FFB2CA12] w-full items-center justify-around mb-24">
           <div className="flex flex-col items-center mt-16 mb-24">
             <h5 className="text-xs">Events</h5>
-            <h2 className="text-3xl font-bold">
+            <h2 className="text-3xl text-center font-bold">
               Upcoming Events and Challenges
             </h2>
           </div>
