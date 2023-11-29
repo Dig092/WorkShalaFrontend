@@ -19,7 +19,6 @@ const Companies = () => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        // Add any other headers as needed
       },
       redirect: "follow",
     };

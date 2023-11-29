@@ -57,7 +57,7 @@ export default function Jobs() {
         Jobs For You
       </div>
       <div className="flex items-center justify-center">
-        <div className=" h-full grid grid-cols-3 gap-20 mt-16 mb-16 ">
+        <div className=" h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:mt-16 mb-16 ">
         {internships.map((internship, index) => (
           <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
             <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
