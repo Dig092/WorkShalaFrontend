@@ -57,7 +57,7 @@ export default function Jobs() {
         Jobs For You
       </div>
       <div className="flex items-center justify-center">
-        <div className=" h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:mt-16 mb-16 ">
+        <div className=" h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:mt-16 mb-16 ">
         {internships.map((internship, index) => (
           <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
             <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
@@ -114,50 +114,62 @@ export default function Jobs() {
       </div>
       <Footer />
 
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {selectedInternship && (
-        <div>
-          <div className="flex items-center justify-between m-8">
-            <div className="flex gap-4">
-              <img className="w-20" src={logo} alt="" />
-              <div className="flex flex-col">
-                <div className="font-semibold text-lg">{selectedInternship.company}</div>
-                <div className="text-sm">
-                  A Full-Service , Design-Driven Studio, For Early And Growing
-                  Startups
+      {/* Modal */}
+      {selectedInternship && (
+        <div className={`fixed bottom-0 ${isModalOpen ? "block" : "hidden"}`}>
+          <div className="bg-black bg-opacity-50 h-screen"></div>
+          <div className="flex justify-center bg-black bg-opacity-50">
+            <div className="bg-white p-4 sm:p-8 rounded-lg  w-full">
+              <button onClick={closeModal} className="text-red-500 ">
+                Close
+              </button>
+
+              {/* Modal Content */}
+              <div>
+                <div className="flex flex-col items-center justify-between sm:flex-row sm:items-start sm:justify-between m-4 sm:m-8 md:w-full">
+                  <div className="flex items-center gap-4">
+                    <img className="w-16 sm:w-20" src={logo} alt="" />
+                    <div className="flex flex-col">
+                      <div className="font-semibold text-lg sm:text-xl">{selectedInternship.company}</div>
+                      <div className="text-sm">
+                        A Full-Service, Design-Driven Studio, For Early And Growing Startups
+                      </div>
+                      <div>{selectedInternship.Internship}</div>
+                    </div>
+                  </div>
+                  <div className="flex gap-4 mt-4 sm:mt-0">
+                    <div className="border px-2 sm:px-4 py-1 sm:py-2 border-black rounded-lg">
+                      Apply
+                    </div>
+                    <div className="border px-2 sm:px-4 py-1 sm:py-2 border-black rounded-lg">
+                      Save
+                    </div>
+                  </div>
                 </div>
-                <div>{selectedInternship.Internship}</div>
+
+                <div className="flex flex-col mx-4 sm:mx-8 my-4">
+                  <div className="font-semibold text-lg sm:text-xl">Skills</div>
+                  <div className="bg-[#946CC320] w-full text-sm px-4 py-2 rounded-md mt-2 sm:mt-4">
+                    HTML5, CSS3, JavaScript, SASS, ReactJS, NextJS, Shopify, MongoDB,
+                    Firebase, ExpressJS
+                  </div>
+                </div>
+
+                <div className="flex flex-col mx-4 sm:mx-8 my-4">
+                  <div className="font-semibold text-lg sm:text-xl">About the Job</div>
+                  <div className="mt-2 sm:mt-3">
+                    Kraftbase is a dynamic full-service studio renowned for its
+                    commitment to excellence in Website Development, App Development,
+                    and Custom Software Development. We are currently seeking a
+                    talented and enthusiastic Full Stack Developer intern to join our
+                    innovative team.
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex gap-8">
-              <div className="border px-4 py-1 border-black rounded-lg">
-                Apply
-              </div>
-              <div className="border px-4 py-1 border-black rounded-lg">
-                Save
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col mx-8 my-4">
-            <div className="font-semibold text-xl">Skills</div>
-            <div className="bg-[#946CC320] w-fit text-sm px-4 py-2 rounded-md mt-4 ">
-              HTML5, CSS3, JavaScript, SASS, ReactJS, NextJS, Shopify, MongoDB,
-              Firebase, ExpressJS
-            </div>
-          </div>
-          <div className="flex flex-col mx-8 my-4">
-            <div className="font-semibold text-xl">About the Job</div>
-            <div className="mt-3">
-              Kraftbase is a dynamic full-service studio renowned for its
-              commitment to excellence in Website Development, App Development,
-              and Custom Software Development. We are currently seeking a
-              talented and enthusiastic Full Stack Developer intern to join our
-              innovative team.
             </div>
           </div>
         </div>
-        )}
-      </Modal>
+      )}
     </>
   );
 }
