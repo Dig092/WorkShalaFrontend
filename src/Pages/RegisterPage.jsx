@@ -42,37 +42,7 @@ const RegisterPage = () => {
 
         if (result.ok) {
           const data = await result.json();
-        const { accessToken } = data; // Retrieve accessToken from response data
-  
-        // Store the access token in localStorage
-        localStorage.setItem('access-token', accessToken);
-  
-        // Set the access token in the headers for subsequent requests
-        const headers = {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        };
-  
-        // Use the headers in the fetch request
-        let result2 = await fetch('https://workshala-7v7q.onrender.com/register', {
-          method: 'POST',
-          body: JSON.stringify(item),
-          headers: headers,
-        });
-          login();
-          nav('/verify');
-          toast.success('Registration successful!');
-        }
-      } catch (error) {
-        console.error('Registration failed', error);
-        // Handle registration error here
-        toast.error('An error occurred during registration. Please try again.');
-      }
-    } else {
-      alert('Please fill in all the details and enter a valid 10-digit phone number.');
-    }
-  };
+          const { accessToken } = data; // Assuming the API returns an accessToken
 
           // Store the access token in localStorage
           localStorage.setItem('access-token', accessToken);
@@ -81,7 +51,7 @@ const RegisterPage = () => {
           const headers = {
             'Content-Type': 'application/json',
             Accept: 'application.json',
-            Authorization: `Bearer ${accessToken}`,
+            Authorization: Bearer ${accessToken},
           };
           login();
           nav('/verify');
