@@ -59,6 +59,12 @@ const Companies = () => {
     setFilteredPosts(tempFilteredPosts);
   };
 
+  const clearAllFilters = () => {
+    setLocationFilter(null);
+    setIndustryFilter(null);
+    setCompanyTypeFilter(null);
+  };
+
   useEffect(() => {
     applyFilters();
   }, [locationFilter, industryFilter, companyTypeFilter]);
@@ -275,6 +281,16 @@ const Companies = () => {
             </Menu.Items>
           </Transition>
         </Menu>
+
+        {/* Clear All Button */}
+        <div className="w-full md:w-1/4 text-left mt-4 md:mt-0">
+          <button
+            onClick={clearAllFilters}
+            className="inline-flex w-full justify-center gap-4 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          >
+            Clear All
+          </button>
+        </div>
       </div>
 
       <div className="flex justify-center items-center w-full bg-[#FFF6F9]">
