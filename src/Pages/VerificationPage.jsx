@@ -50,7 +50,7 @@ const VerificationPage = () => {
 
   return (
     <div className="flex flex-col md:flex-row items-center justify-center p-1 ml-7">
-      <div className="md:pl-24">
+      <div>
         <img src={SignInPageImage} height="500rem" width="500rem" alt='' />
       </div>
       <div className="md:pl-20 pt-16">

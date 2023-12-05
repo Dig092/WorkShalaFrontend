@@ -63,9 +63,9 @@ const LoginPage = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center">
       <div className="w-full md:w-1/2 mb-4 md:mb-0">
-        <img className="w-full" src={SignInPageImage} alt="" />
+        <img src={SignInPageImage}  height="540rem" width="540rem" alt="" />
       </div>
-      <div className="w-full md:w-1/4 pl-4 md:pl-24">
+      <div>
         <span className="font-sans text-left text-4xl font-bold">Login</span>
         <br />
         <div className="font-sans text-base pt-4 md:pt-12">

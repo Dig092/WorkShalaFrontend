@@ -73,9 +73,9 @@ const RegisterPage = () => {
   return (
     <div className="flex flex-col md:flex-row justify-center items-center">
       <div className="w-full md:w-2/4 mb-4 md:mb-0">
-        <img src={RegisterPageImage} alt="" className="w-full" />
+        <img src={RegisterPageImage} height="550rem" width="550rem" alt=""  />
       </div>
-      <div className="w-full md:w-1/2 lg:w-1/3 pl-4 md:pl-24">
+      <div>
         <span className="font-sans text-left text-3xl md:text-4xl font-bold">Register</span>
         <div className="font-sans text-1x1 pt-6 md:pt-10">
           Name
