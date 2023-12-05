@@ -16,8 +16,8 @@ const NavBar = () => {
 
   return (
     <div className=' text-black'>
-      <div className='container mx-auto flex justify-between items-center py-4'>
-        <div className='flex items-center gap-4'>
+      <div className='container flex mx-4 justify-between items-center py-4'>
+        <div className='flex  items-center gap-4'>
           <div className='w-32 mr-4'>
             <Link to="/">
               <img src={logo} alt="Logo" />
@@ -32,7 +32,7 @@ const NavBar = () => {
           </div>
         </div>
         
-        <div className='flex items-center gap-4'>
+        <div className='flex items-center mr-4 gap-4'>
           {/* Authentication buttons for larger screens */}
           {!isAuthenticated ? (
             <>

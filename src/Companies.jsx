@@ -280,7 +280,7 @@ const Companies = () => {
       <div className="flex justify-center items-center w-full bg-[#FFF6F9]">
         <div className="w-3/4 h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:mt-16 mb-16 mr-16 ">
           {filteredPosts.map((post) => (
-            <div className="flex flex-col items-center  snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
+            <div className="flex flex-col items-center snap-start border-4 rounded-md flex-shrink-0 w-64 h-80 mx-4">
               <div className="flex items-center justify-center w-full h-20">
                 <img
                   className="w-12 m-3 rounded-full"
