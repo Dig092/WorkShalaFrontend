@@ -51,7 +51,7 @@ const RegisterPage = () => {
           const headers = {
             'Content-Type': 'application/json',
             Accept: 'application.json',
-            Authorization: Bearer ${accessToken},
+            Authorization: `Bearer ${accessToken}`,
           };
           login();
           nav('/verify');
