@@ -74,14 +74,40 @@ const RegisterPage = () => {
     }
   };
 
+          // Store the access token in localStorage
+          localStorage.setItem('access-token', accessToken);
+
+          // Set the access token in the headers for subsequent requests
+          const headers = {
+            'Content-Type': 'application/json',
+            Accept: 'application.json',
+            Authorization: `Bearer ${accessToken}`,
+          };
+          login();
+          nav('/verify');
+          toast.success('Registration successful!');
+        } else {
+          // Handle unsuccessful registration (e.g., show an error message to the user)
+          console.error('Registration failed');
+          toast.error('Registration failed. Please try again.');
+        }
+      } catch (error) {
+        console.error('Registration failed', error);
+        // Handle registration error here
+        toast.error('An error occurred during registration. Please try again.');
+      }
+    } else {
+      alert('Please fill in all the details and enter a valid 10-digit phone number.');
+    }
+  };
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-2/4">
-        <img src={RegisterPageImage} alt="" />
+    <div className="flex flex-col md:flex-row justify-center items-center">
+      <div className="w-full md:w-2/4 mb-4 md:mb-0">
+        <img src={RegisterPageImage} height="550rem" width="550rem" alt=""  />
       </div>
-      <div className="pl-16 pt-10">
-        <span className="font-sans text-left text-3xl font-bold">Register</span>
-        <div className="font-sans text-1x1 pt-10">
+      <div>
+        <span className="font-sans text-left text-3xl md:text-4xl font-bold">Register</span>
+        <div className="font-sans text-1x1 pt-6 md:pt-10">
           Name
           <br />
           <div className="w-full pt-1 pb-2">
@@ -142,8 +168,10 @@ const RegisterPage = () => {
           </div>
           <br />
           <button
-            className={`bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md ${
-              isFormValid && isPhoneNumberValid && isEmailValid ? '' : 'cursor-not-allowed opacity-50'
+            className={`bg-[#946CC3] text-white w-full md:w-80 p-2.5 mb-2 rounded-md ${
+              isFormValid && isPhoneNumberValid && isEmailValid
+                ? ''
+                : 'cursor-not-allowed opacity-50'
             }`}
             onClick={signUp}
             disabled={!isFormValid || !isPhoneNumberValid || !isEmailValid}

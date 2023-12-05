@@ -7,7 +7,6 @@ import { useAuth } from '../Components/AuthContext';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const VerificationPage = () => {
   const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -50,23 +49,30 @@ const VerificationPage = () => {
   }
 
   return (
-    <div className="flex p-1 ml-7">
-      <div className="pl-24">
+    <div className="flex flex-col md:flex-row items-center justify-center p-1 ml-7">
+      <div>
         <img src={SignInPageImage} height="500rem" width="500rem" alt='' />
       </div>
-      <div className="pl-20 pt-16">
+      <div className="md:pl-20 pt-16">
         <span className="font-sans text-left text-4xl font-bold">Verify It's You</span><br />
         <div className="font-sans text-base pt-12">
           Email<br />
           <div className="w-full pt-2 pb-3">
-            <input className="w-full p-3 pl-4 border border-black rounded-md text-xs" type='email'   value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email' />
+            <input
+              className="w-full p-3 pl-4 border border-black rounded-md text-xs"
+              type='email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder='Enter your email'
+            />
           </div>
           OTP
           <div className="w-full pt-2 relative">
             <input
               className="w-full p-3 pl-4 border border-black rounded-md text-xs"
               type={showPassword ? 'text' : 'password'}
-              value={otp} onChange={(e)=>setOTP(e.target.value)}
+              value={otp}
+              onChange={(e) => setOTP(e.target.value)}
               placeholder='Enter your OTP'
             />
             <img
@@ -77,10 +83,25 @@ const VerificationPage = () => {
             />
           </div>
           <br />
-          <button className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md" onClick={verify}>Sign In</button>
+          <button
+            className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md"
+            onClick={verify}
+          >
+            Sign In
+          </button>
         </div><br />
       </div>
-      <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 };

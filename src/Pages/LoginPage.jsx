@@ -68,14 +68,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex w-full items-center justify-center">
-      <div className="w-2/4">
-        <img className="" src={SignInPageImage} alt="" />
+    <div className="flex flex-col md:flex-row items-center justify-center">
+      <div className="w-full md:w-1/2 mb-4 md:mb-0">
+        <img src={SignInPageImage}  height="540rem" width="540rem" alt="" />
       </div>
-      <div className="w-1/4 pl-24">
+      <div>
         <span className="font-sans text-left text-4xl font-bold">Login</span>
         <br />
-        <div className="font-sans text-base pt-12">
+        <div className="font-sans text-base pt-4 md:pt-12">
           Email
           <br />
           <div className="w-full pt-2 pb-3">
@@ -103,23 +103,22 @@ const LoginPage = () => {
               onClick={togglePasswordVisibility}
             />
           </div>
-          <div className="flex">
-            <label className="text-sm pt-2">
+          <div className="flex flex-col md:flex-row items-center md:items-start md:space-x-4 md:pt-2">
+            <label className="text-sm pt-2 md:pt-0">
               <input type="checkbox" /> Remember me
             </label>
-            <p className="text-sm pl-24 pt-2 pb-4">
+            <p className="text-sm md:pl-24 pt-2 pb-4">
               <Link to="/forgetpassword">Forget Password?</Link>
             </p>
           </div>
           <br />
           <button
-            className="bg-[#946CC3] text-white w-80 p-2.5 mb-2 rounded-md"
+            className="bg-[#946CC3] text-white w-full md:w-80 p-2.5 mb-2 rounded-md"
             onClick={signIn}
           >
             Sign In
           </button>
         </div>
-        <br />
         <div className="text-center pt-2 font-bold">
           Haven't Registered Yet!{" "}
           <Link to="/register" className="text-[#946CC3]">
