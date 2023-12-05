@@ -11,10 +11,43 @@ import time from "./assets/icons/time.png";
 import logo from "./assets/icons/kraftbaseLogo.png";
 
 export default function Jobs() {
+  const [selectedInternship, setSelectedInternship] = useState(null);
+  const [internships, setInternships] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
+  const openModal = (internship) => {
+    setSelectedInternship(internship);
+    setModalOpen(true);
+  }
+  const closeModal = () => {
+    setSelectedInternship(null);
+    setModalOpen(false);
+  }
+
+  const getData = async () => {
+    try {
+      const response = await fetch("https://intrship.onrender.com/internship/javascript", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setInternships(data);
+      } else {
+        console.error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
@@ -24,20 +57,21 @@ export default function Jobs() {
         Jobs For You
       </div>
       <div className="flex items-center justify-center">
-        <div className=" h-full grid grid-cols-3 gap-20 mt-16 mb-16 ">
+        <div className=" h-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-4 md:mt-16 mb-16 ">
+        {internships.map((internship, index) => (
           <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
             <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
               <div className="bg-green-200 rounded-full w-4 h-4"></div>
               <div>Actively hiring</div>
             </div>
             <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
+              <div className="font-bold text-lg w-36 mt-2">
+                {internship.Internship}
               </div>
               <div className="w-16 h-16 bg-black rounded-lg"></div>
             </div>
             <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
+              {internship.state}
             </div>
             <div className="flex items-center justify-between mx-6 my-4">
               <div className="flex flex-col  ">
@@ -47,7 +81,7 @@ export default function Jobs() {
                 </div>
                 <div className="flex items-center gap-2">
                   <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
+                  <h1>{internship.state}</h1>
                 </div>
               </div>
               <div>
@@ -57,7 +91,7 @@ export default function Jobs() {
                 </div>
                 <div className="flex items-center gap-2">
                   <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
+                  <h1>{internship.salary}</h1>
                 </div>
               </div>
             </div>
@@ -71,277 +105,37 @@ export default function Jobs() {
             </div>
             <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
             <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button onClick={openModal} className="text-blue-400 m-2">
+            <button onClick={() => openModal(internship)} className="text-blue-400 m-2">
               View details
             </button>
           </div>
-
-          <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
-            <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
-              <div className="bg-green-200 rounded-full w-4 h-4"></div>
-              <div>Actively hiring</div>
-            </div>
-            <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
-              </div>
-              <div className="w-16 h-16 bg-black rounded-lg"></div>
-            </div>
-            <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
-            </div>
-            <div className="flex items-center justify-between mx-6 my-4">
-              <div className="flex flex-col  ">
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={work} alt="" />
-                  <h1>Work from Home</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={shuttle} alt="" />
-                  <h1>Starts immediately</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
-                </div>
-              </div>
-            </div>
-            <div className="flex mx-6 my-4 gap-4">
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Internship
-              </div>
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Part time
-              </div>
-            </div>
-            <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
-            <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button className="text-blue-400 m-2">View details</button>
-          </div>
-
-          <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
-            <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
-              <div className="bg-green-200 rounded-full w-4 h-4"></div>
-              <div>Actively hiring</div>
-            </div>
-            <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
-              </div>
-              <div className="w-16 h-16 bg-black rounded-lg"></div>
-            </div>
-            <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
-            </div>
-            <div className="flex items-center justify-between mx-6 my-4">
-              <div className="flex flex-col  ">
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={work} alt="" />
-                  <h1>Work from Home</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={shuttle} alt="" />
-                  <h1>Starts immediately</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
-                </div>
-              </div>
-            </div>
-            <div className="flex mx-6 my-4 gap-4">
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Internship
-              </div>
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Part time
-              </div>
-            </div>
-            <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
-            <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button className="text-blue-400 m-2">View details</button>
-          </div>
-
-          <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
-            <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
-              <div className="bg-green-200 rounded-full w-4 h-4"></div>
-              <div>Actively hiring</div>
-            </div>
-            <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
-              </div>
-              <div className="w-16 h-16 bg-black rounded-lg"></div>
-            </div>
-            <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
-            </div>
-            <div className="flex items-center justify-between mx-6 my-4">
-              <div className="flex flex-col  ">
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={work} alt="" />
-                  <h1>Work from Home</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={shuttle} alt="" />
-                  <h1>Starts immediately</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
-                </div>
-              </div>
-            </div>
-            <div className="flex mx-6 my-4 gap-4">
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Internship
-              </div>
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Part time
-              </div>
-            </div>
-            <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
-            <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button className="text-blue-400 m-2">View details</button>
-          </div>
-
-          <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
-            <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
-              <div className="bg-green-200 rounded-full w-4 h-4"></div>
-              <div>Actively hiring</div>
-            </div>
-            <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
-              </div>
-              <div className="w-16 h-16 bg-black rounded-lg"></div>
-            </div>
-            <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
-            </div>
-            <div className="flex items-center justify-between mx-6 my-4">
-              <div className="flex flex-col  ">
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={work} alt="" />
-                  <h1>Work from Home</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={shuttle} alt="" />
-                  <h1>Starts immediately</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
-                </div>
-              </div>
-            </div>
-            <div className="flex mx-6 my-4 gap-4">
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Internship
-              </div>
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Part time
-              </div>
-            </div>
-            <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
-            <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button className="text-blue-400 m-2">View details</button>
-          </div>
-
-          <div className="flex flex-col rounded-md shadow-lg w-96 h-84">
-            <div className="flex w-36 mt-4 mx-6 items-center justify-center border gap-2">
-              <div className="bg-green-200 rounded-full w-4 h-4"></div>
-              <div>Actively hiring</div>
-            </div>
-            <div className="flex mx-6 items-center justify-between">
-              <div className="font-bold text-lg w-16">
-                Fundraising Voulnteering
-              </div>
-              <div className="w-16 h-16 bg-black rounded-lg"></div>
-            </div>
-            <div className="text-sm w-40 mx-6">
-              Odisha Development Management programme (ODMP)
-            </div>
-            <div className="flex items-center justify-between mx-6 my-4">
-              <div className="flex flex-col  ">
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={work} alt="" />
-                  <h1>Work from Home</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={time} alt="" />
-                  <h1>1 Week</h1>
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={shuttle} alt="" />
-                  <h1>Starts immediately</h1>
-                </div>
-                <div className="flex items-center gap-2">
-                  <img className="w-4" src={salary} alt="" />
-                  <h1>225-5000 /week</h1>
-                </div>
-              </div>
-            </div>
-            <div className="flex mx-6 my-4 gap-4">
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Internship
-              </div>
-              <div className="bg-[#946CC360] text-sm px-3 py-1 rounded">
-                Part time
-              </div>
-            </div>
-            <div className="mx-6 my-2 text-sm text-blue-400">5 days ago</div>
-            <div className="w-80 h-0.5 bg-[#946CC360] mx-7 my-3"></div>
-            <button className="text-blue-400 m-2">View details</button>
-          </div>
+          ))}
         </div>
       </div>
       <Footer />
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        {/* Your modal content goes here */}
+        {selectedInternship && (
         <div>
           <div className="flex items-center justify-between m-8">
             <div className="flex gap-4">
               <img className="w-20" src={logo} alt="" />
               <div className="flex flex-col">
-                <div className="font-semibold text-lg">Kraftbase</div>
+                <div className="font-semibold text-lg">{selectedInternship.company}</div>
                 <div className="text-sm">
                   A Full-Service , Design-Driven Studio, For Early And Growing
                   Startups
                 </div>
-                <div>Full Stack Developer Intern</div>
+                <div>{selectedInternship.Internship}</div>
               </div>
             </div>
             <div className="flex gap-8">
-            <div className="border px-4 py-1 border-black rounded-lg">Apply</div>
-            <div className="border px-4 py-1 border-black rounded-lg">Save</div>
+              <div className="border px-4 py-1 border-black rounded-lg">
+                Apply
+              </div>
+              <div className="border px-4 py-1 border-black rounded-lg">
+                Save
+              </div>
             </div>
           </div>
           <div className="flex flex-col mx-8 my-4">
@@ -362,6 +156,7 @@ export default function Jobs() {
             </div>
           </div>
         </div>
+        )}
       </Modal>
     </>
   );

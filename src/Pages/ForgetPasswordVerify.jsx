@@ -1,6 +1,7 @@
 import React from 'react'
 import ResetPasswordImage from '../assets/images/ResetPasswordImage.png';
-  
+import { Link, useNavigate } from 'react-router-dom';  
+
 const ForgetPasswordVerify=() =>{
   return (
     <div className="flex p-1 ml-7">

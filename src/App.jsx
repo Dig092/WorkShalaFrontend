@@ -17,6 +17,7 @@ import Jobs from "./Jobs";
 import VerificationPage from "./Pages/VerificationPage";
 import Profile from "./Pages/Profile";
 import Welcome from "./Pages/Welcome";
+import ProtectedRoute from "./Components/ProtectedRoute";
 import { AuthProvider } from "./Components/AuthContext";
 
 const App = () => {
@@ -25,18 +26,15 @@ const App = () => {
       <AuthProvider>
         <Router>
           <Routes>
+            <Route path="/Profile" element={<Profile/>} />
             <Route path="/" element={<HomePage />}></Route>
-            <Route
-              path="login"
-              element={<LoginPage/>}
-            ></Route>
+            <Route path="login" element={<LoginPage />}></Route>
             <Route path="forgetpassword" element={<ForgetPassword />}></Route>
             <Route path="register" element={<RegisterPage />}></Route>
             <Route
               path="forgetpasswordverify"
               element={<ForgetPasswordVerify />}
             ></Route>
-            <Route path="/profile" element={<Profile />} />
             <Route path="/Welcome" element={<Welcome />} />
             <Route path="/Companies" element={<Companies />}></Route>
             <Route path="/Courses" element={<Courses />}></Route>

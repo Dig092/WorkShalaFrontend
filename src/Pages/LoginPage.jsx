@@ -34,24 +34,31 @@ const LoginPage = () => {
 
       if (result.ok) {
         const data = await result.json();
-        const { accessToken } = data;
+      const { accessToken } = data; // Retrieve accessToken from response data
 
-        // Store the access token in localStorage
-        localStorage.setItem('access-token', accessToken);
+      // Store the access token in localStorage
+      localStorage.setItem('access-token', accessToken);
 
-        // Set the access token in the headers for subsequent requests
-        const headers = {
-          'Content-Type': 'application/json',
-          Accept: 'application.json',
-          Authorization: `Bearer ${accessToken}`,
-        };
+      // Set the access token in the headers for subsequent requests
+      const headers = {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      };
+
+      // Use the headers in the fetch request
+      let result2 = await fetch('https://workshala-7v7q.onrender.com/login', {
+        method: 'POST',
+        body: JSON.stringify(item),
+        headers: headers,
+      });
+
         login(accessToken);
         nav('/');
-        
-        // Display a success toast
+        console.log(accessToken);
         toast.success('Login successful!', { position: 'top-right' });
       } else {
-        // Handle unsuccessful login (e.g., show an error message to the user)
+        toast.error('Invalid Credentials');
         console.error('Login failed');
       }
     } catch (error) {
@@ -122,5 +129,4 @@ const LoginPage = () => {
     </div>
   );
 };
-
 export default LoginPage;

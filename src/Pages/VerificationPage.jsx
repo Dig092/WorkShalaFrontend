@@ -22,28 +22,28 @@ const VerificationPage = () => {
     try {
       let item = { email, otp };
       console.warn(item);
-
-      let result = await fetch('https://workshala-7v7q.onrender.com/verifyEmail', {
-        method: 'POST',
+  
+      let result = await fetch("https://workshala-7v7q.onrender.com/verifyEmail", {
+        method: "POST",
         body: JSON.stringify(item),
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application.json',
+          "Content-Type": "application/json",
+          Accept: "application.json",
         },
       });
-
+  
       if (result.ok) {
         login();
-        nav('/Welcome');
+        nav("/Welcome");
         toast.success('Verification successful!');
       } else {
         // Handle unsuccessful verification (e.g., show an error message to the user)
-        console.error('Verify failed');
+        console.error("Verify failed");
         toast.error('Verification failed. Please try again.');
       }
     } catch (error) {
       // Handle other errors (network issues, etc.)
-      console.error('An error occurred during verification', error);
+      console.error("An error occurred during verification", error);
       toast.error('An error occurred during verification. Please try again.');
     }
   }
