@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
@@ -22,28 +23,21 @@ const VerificationPage = () => {
     try {
       let item = { email, otp };
       console.warn(item);
-  
-      let result = await fetch("https://workshala-7v7q.onrender.com/verifyEmail", {
-        method: "POST",
-        body: JSON.stringify(item),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application.json",
-        },
-      });
-  
-      if (result.ok) {
+
+      const response = await axios.post('https://workshala-7v7q.onrender.com/verifyEmail', item);
+
+      if (response.status === 200) {
         login();
-        nav("/Welcome");
+        nav('/Welcome');
         toast.success('Verification successful!');
       } else {
         // Handle unsuccessful verification (e.g., show an error message to the user)
-        console.error("Verify failed");
+        console.error('Verify failed');
         toast.error('Verification failed. Please try again.');
       }
     } catch (error) {
       // Handle other errors (network issues, etc.)
-      console.error("An error occurred during verification", error);
+      console.error('An error occurred during verification', error);
       toast.error('An error occurred during verification. Please try again.');
     }
   }

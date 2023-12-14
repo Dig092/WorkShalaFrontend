@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Components/AuthContext';
 import { toast } from 'react-toastify';
+import axios from 'axios'; // Import Axios
 
 import SignInPageImage from '../assets/images/SignInPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
@@ -23,35 +24,30 @@ const LoginPage = () => {
       let item = { email, password };
       console.warn(item);
 
-      let result = await fetch('https://workshala-7v7q.onrender.com/login', {
-        method: 'POST',
-        body: JSON.stringify(item),
+      const response = await axios.post('https://workshala-7v7q.onrender.com/login', item, {
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application.json',
+          Accept: 'application/json',
         },
       });
 
-      if (result.ok) {
-        const data = await result.json();
-      const { accessToken } = data; // Retrieve accessToken from response data
+      if (response.status === 200) {
+        const { accessToken } = response.data;
 
-      // Store the access token in localStorage
-      localStorage.setItem('access-token', accessToken);
+        // Store the access token in localStorage
+        localStorage.setItem('access-token', accessToken);
 
-      // Set the access token in the headers for subsequent requests
-      const headers = {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      };
+        // Set the access token in the headers for subsequent requests
+        const headers = {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        };
 
-      // Use the headers in the fetch request
-      let result2 = await fetch('https://workshala-7v7q.onrender.com/login', {
-        method: 'POST',
-        body: JSON.stringify(item),
-        headers: headers,
-      });
+        // Use the headers in the Axios request
+        const result2 = await axios.post('https://workshala-7v7q.onrender.com/login', item, {
+          headers: headers,
+        });
 
         login(accessToken);
         nav('/');
@@ -68,9 +64,9 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center">
+        <div className="flex flex-col md:flex-row items-center justify-center">
       <div className="w-full md:w-1/2 mb-4 md:mb-0">
-        <img src={SignInPageImage}  height="540rem" width="540rem" alt="" />
+        <img src={SignInPageImage}  height="520rem" width="520rem" alt="" />
       </div>
       <div>
         <span className="font-sans text-left text-4xl font-bold">Login</span>
@@ -129,4 +125,5 @@ const LoginPage = () => {
     </div>
   );
 };
+
 export default LoginPage;

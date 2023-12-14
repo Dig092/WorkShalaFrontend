@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; 
 import RegisterPageImage from '../assets/images/RegisterPageImage.png';
 import ShowPasswordImage from '../assets/icons/EyeImageForShowPassword1.png';
 import HidePasswordImage from '../assets/icons/EyeImageForNotShowPassword.png';
@@ -31,36 +32,22 @@ const RegisterPage = () => {
       localStorage.setItem('user-information', JSON.stringify(item));
 
       try {
-        let result = await fetch('https://workshala-7v7q.onrender.com/register', {
-          method: 'POST',
-          body: JSON.stringify(item),
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application.json',
-          },
-        });
+        const response = await axios.post('https://workshala-7v7q.onrender.com/register', item);
 
-        if (result.ok) {
-          const data = await result.json();
-          const { accessToken } = data; // Assuming the API returns an accessToken
+        const { accessToken } = response.data; // Assuming the API returns an accessToken
 
-          // Store the access token in localStorage
-          localStorage.setItem('access-token', accessToken);
+        // Store the access token in localStorage
+        localStorage.setItem('access-token', accessToken);
 
-          // Set the access token in the headers for subsequent requests
-          const headers = {
-            'Content-Type': 'application/json',
-            Accept: 'application.json',
-            Authorization: `Bearer ${accessToken}`,
-          };
-          login();
-          nav('/verify');
-          toast.success('Registration successful!');
-        } else {
-          // Handle unsuccessful registration (e.g., show an error message to the user)
-          console.error('Registration failed');
-          toast.error('Registration failed. Please try again.');
-        }
+        // Set the access token in the headers for subsequent requests
+        const headers = {
+          'Content-Type': 'application/json',
+          Accept: 'application.json',
+          Authorization: `Bearer ${accessToken}`,
+        };
+        login();
+        nav('/verify');
+        toast.success('Registration successful!');
       } catch (error) {
         console.error('Registration failed', error);
         // Handle registration error here
@@ -70,6 +57,7 @@ const RegisterPage = () => {
       alert('Please fill in all the details and enter a valid 10-digit phone number.');
     }
   };
+
   return (
     <div className="flex flex-col md:flex-row justify-center items-center">
       <div className="w-full md:w-2/4 mb-4 md:mb-0">
