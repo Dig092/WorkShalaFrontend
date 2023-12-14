@@ -199,8 +199,8 @@ const Welcome = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        skills: selectedSkills,
         workStatus: workStatus,
+        skills: selectedSkills,
       }),
     };
 
@@ -252,9 +252,9 @@ const Welcome = () => {
           <div className="mt-4 font-semibold text-lg md:text-2xl">Your Skills</div>
           <div className="mt-2 md:mt-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4">
-              {["Blockchain", "Architecture", "Javascript", "Design", "IT and Software", "Database", "Marketing", "Writing", "Web development"].map((skill) => (
+              {["Blockchain", "Architecture", "Javascript", "Design", "IT and Software", "Database", "Marketing", "Writing", "Web development"].map((skill, id) => (
                 <button
-                  key={skill}
+                  key={id}
                   className={`${
                     selectedSkills.includes(skill)
                       ? "bg-[#9747FF90] text-white"
