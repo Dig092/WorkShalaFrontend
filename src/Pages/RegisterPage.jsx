@@ -22,7 +22,7 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
 
   const isFormValid = name && phonenumber && email && password;
-  const isPhoneNumberValid = /^\d{10}$/.test(phonenumber);
+  const isPhoneNumberValid = /^[0-9]{10}$/.test(phonenumber);
   const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const signUp = async () => {
@@ -32,19 +32,7 @@ const RegisterPage = () => {
       localStorage.setItem('user-information', JSON.stringify(item));
 
       try {
-        const response = await axios.post('https://workshala-7v7q.onrender.com/register', item);
-
-        const { accessToken } = response.data; // Assuming the API returns an accessToken
-
-        // Store the access token in localStorage
-        localStorage.setItem('access-token', accessToken);
-
-        // Set the access token in the headers for subsequent requests
-        const headers = {
-          'Content-Type': 'application/json',
-          Accept: 'application.json',
-          Authorization: `Bearer ${accessToken}`,
-        };
+        const response = await axios.post('https://workshala-7v7q.onrender.com/register', item,{withCredentials:true});
         login();
         nav('/verify');
         toast.success('Registration successful!');
@@ -83,7 +71,7 @@ const RegisterPage = () => {
               className={`w-full p-3 pl-4 border rounded-md text-xs ${
                 isPhoneNumberValid ? '' : 'border-red-500'
               }`}
-              type="tel"
+              type="text"
               value={phonenumber}
               onChange={(e) => setPhonenumber(e.target.value)}
               placeholder="Enter your phone number"

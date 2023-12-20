@@ -24,7 +24,7 @@ const VerificationPage = () => {
       let item = { email, otp };
       console.warn(item);
 
-      const response = await axios.post('https://workshala-7v7q.onrender.com/verifyEmail', item);
+      const response = await axios.post('https://workshala-7v7q.onrender.com/verifyEmail', item,{withCredentials:true});
 
       if (response.status === 200) {
         login();

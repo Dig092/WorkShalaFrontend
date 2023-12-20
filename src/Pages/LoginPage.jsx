@@ -32,26 +32,12 @@ const LoginPage = () => {
       });
 
       if (response.status === 200) {
-        const { accessToken } = response.data;
-
-        // Store the access token in localStorage
-        localStorage.setItem('access-token', accessToken);
-
-        // Set the access token in the headers for subsequent requests
-        const headers = {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        };
-
         // Use the headers in the Axios request
-        const result2 = await axios.post('https://workshala-7v7q.onrender.com/login', item, {
-          headers: headers,
-        });
+        const result2 = await axios.post('https://workshala-7v7q.onrender.com/login', item,{withCredentials:true});
 
-        login(accessToken);
+        login();
         nav('/');
-        console.log(accessToken);
+        console.log();
         toast.success('Login successful!', { position: 'top-right' });
       } else {
         toast.error('Invalid Credentials');
