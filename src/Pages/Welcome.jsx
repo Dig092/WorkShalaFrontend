@@ -1,6 +1,4 @@
 
-
-// export default Welcome;
 import React, { useState } from "react";
 import axios from "axios"; // Import Axios
 import NavBar from "../Components/NavBar";

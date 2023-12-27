@@ -97,21 +97,22 @@ const RegisterPage = () => {
             )}
           </div>
           Password
-          <div className="w-full pt-1">
-            <input
-              className="w-full p-3 pl-4 border border-black rounded-md text-xs"
-              type={showPassword ? 'text' : 'password'}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
-            />
-            <img
-              src={showPassword ? HidePasswordImage : ShowPasswordImage}
-              alt="Toggle Password Visibility"
-              className="absolute pb-10 right-1/4 transform -translate-y-1/2 cursor-pointer"
-              onClick={togglePasswordVisibility}
-            />
-          </div>
+          <div className="w-full pt-1 relative">
+  <input
+    className="w-full p-3 pl-4 border border-black rounded-md text-xs"
+    type={showPassword ? 'text' : 'password'}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    placeholder="Enter your password"
+  />
+  <img
+    src={showPassword ? HidePasswordImage : ShowPasswordImage}
+    alt="Toggle Password Visibility"
+    className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer"
+    onClick={togglePasswordVisibility}
+  />
+</div>
+
           <br />
           <button
             className={`bg-[#946CC3] text-white w-full md:w-80 p-2.5 mb-2 rounded-md ${
